@@ -60,7 +60,7 @@ fn validate_password(password: &String, policy: &PasswordPolicy) -> bool {
 	}
 }
 
-pub fn part_01(input: &String) -> i32 {
+pub fn part_01(input: &String) -> u64 {
 	let password_list: Vec<String> = input.split('\n').map(|s| s.to_string()).collect();
 	let mut valid_passwords = 0;
 	for p in password_list {
@@ -75,7 +75,7 @@ pub fn part_01(input: &String) -> i32 {
 	valid_passwords
 }
 
-pub fn part_02(input: &String) -> i32 {
+pub fn part_02(input: &String) -> u64 {
 	let password_list: Vec<String> = input.split('\n').map(|s| s.to_string()).collect();
 	let mut valid_passwords = 0;
 	for p in password_list {
