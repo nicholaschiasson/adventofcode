@@ -34,4 +34,14 @@ fn main() {
 	println!("{}", day_03::part_01(&input_03));
 	println!("{}", day_03::part_02(&input_03));
 	println!();
+
+	// Day 04
+	let input_file_04 = env::current_dir()
+		.expect("Failed to get current directory")
+		.join("rsrc/input_04.txt");
+	let input_04 = fs::read_to_string(input_file_04).expect("Failed to read file.");
+	println!("Day 04");
+	println!("{}", day_04::part_01(&input_04));
+	println!("{}", day_04::part_02(&input_04));
+	println!();
 }
