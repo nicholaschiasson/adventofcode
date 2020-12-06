@@ -6,7 +6,6 @@ pub fn part_01(input: &String) -> u64 {
 	for i in (1..expenses.len()).rev() {
 		for j in 0..i - 1 {
 			if expenses[i] + expenses[j] == 2020 {
-				println!("{} + {} = 2020", expenses[i], expenses[j]);
 				return expenses[i] * expenses[j];
 			}
 		}
@@ -25,7 +24,6 @@ pub fn part_02(input: &String) -> u64 {
 			if partial_sum <= 2020 {
 				for k in 0..j - 1 {
 					if partial_sum + expenses[k] == 2020 {
-						println!("{} + {} + {} = 2020", expenses[i], expenses[j], expenses[k]);
 						return expenses[i] * expenses[j] * expenses[k];
 					}
 				}
