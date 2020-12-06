@@ -21,9 +21,7 @@ pub fn part_02(input: &String) -> u64 {
 				m
 			})
 			.iter()
-			.filter(|(_, n)| **n == group.lines().map(|_| 0).collect::<Vec<u8>>().len())
-			.map(|_| 0)
-			.collect::<Vec<u8>>()
-			.len()
+			.filter(|(_, n)| **n == group.lines().count())
+			.count()
 	}) as u64
 }
