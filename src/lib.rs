@@ -16,72 +16,96 @@ mod tests {
 	#[cfg(test)]
 	mod day_01 {
 		use crate::days::day_01 as day;
+		const DAY_NUM: u8 = 1;
 
 		#[test]
 		fn part_01() {
-			assert_eq!(day::part_01(&super::read_input(1)), 100419);
+			assert_eq!(day::part_01(&super::read_input(DAY_NUM)), 100419);
 		}
 
 		#[test]
 		fn part_02() {
-			assert_eq!(day::part_02(&&super::read_input(1)), 265253940);
+			assert_eq!(day::part_02(&super::read_input(DAY_NUM)), 265253940);
 		}
 	}
 
 	#[cfg(test)]
 	mod day_02 {
 		use crate::days::day_02 as day;
+		const DAY_NUM: u8 = 2;
 
 		#[test]
 		fn part_01() {
-			assert_eq!(day::part_01(&&super::read_input(2)), 456);
+			assert_eq!(day::part_01(&super::read_input(DAY_NUM)), 456);
 		}
 
 		#[test]
 		fn part_02() {
-			assert_eq!(day::part_02(&&super::read_input(2)), 308);
+			assert_eq!(day::part_02(&super::read_input(DAY_NUM)), 308);
 		}
 	}
+
 	#[cfg(test)]
 	mod day_03 {
 		use crate::days::day_03 as day;
+		const DAY_NUM: u8 = 3;
 
 		#[test]
 		fn part_01() {
-			assert_eq!(day::part_01(&&super::read_input(3)), 151);
+			assert_eq!(day::part_01(&super::read_input(DAY_NUM)), 151);
 		}
 
 		#[test]
 		fn part_02() {
-			assert_eq!(day::part_02(&&super::read_input(3)), 7540141059);
+			assert_eq!(day::part_02(&super::read_input(DAY_NUM)), 7540141059);
 		}
 	}
+
 	#[cfg(test)]
 	mod day_04 {
 		use crate::days::day_04 as day;
+		const DAY_NUM: u8 = 4;
 
 		#[test]
 		fn part_01() {
-			assert_eq!(day::part_01(&&super::read_input(4)), 213);
+			assert_eq!(day::part_01(&super::read_input(DAY_NUM)), 213);
 		}
 
 		#[test]
 		fn part_02() {
-			assert_eq!(day::part_02(&&super::read_input(4)), 147);
+			assert_eq!(day::part_02(&super::read_input(DAY_NUM)), 147);
 		}
 	}
+
 	#[cfg(test)]
 	mod day_05 {
 		use crate::days::day_05 as day;
+		const DAY_NUM: u8 = 5;
 
 		#[test]
 		fn part_01() {
-			assert_eq!(day::part_01(&&super::read_input(5)), 896);
+			assert_eq!(day::part_01(&super::read_input(DAY_NUM)), 896);
 		}
 
 		#[test]
 		fn part_02() {
-			assert_eq!(day::part_02(&&super::read_input(5)), 659);
+			assert_eq!(day::part_02(&super::read_input(DAY_NUM)), 659);
+		}
+	}
+
+	#[cfg(test)]
+	mod day_06 {
+		use crate::days::day_06 as day;
+		const DAY_NUM: u8 = 6;
+
+		#[test]
+		fn part_01() {
+			assert_eq!(day::part_01(&super::read_input(DAY_NUM)), 6763);
+		}
+
+		#[test]
+		fn part_02() {
+			assert_eq!(day::part_02(&super::read_input(DAY_NUM)), 3512);
 		}
 	}
 }
