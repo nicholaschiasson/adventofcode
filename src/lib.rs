@@ -181,5 +181,28 @@ mod tests {
 				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 2092);
 			}
 		}
+
+		#[cfg(test)]
+		mod day_09 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_09 as day;
+			const DAY_NUM: u8 = 9;
+
+			#[test]
+			fn part_01() {
+				assert_eq!(
+					day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)),
+					3199139634
+				);
+			}
+
+			#[test]
+			fn part_02() {
+				assert_eq!(
+					day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)),
+					438559930
+				);
+			}
+		}
 	}
 }
