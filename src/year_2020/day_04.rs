@@ -123,31 +123,25 @@ impl Passport {
 }
 
 fn parse_passport(passport: &String) -> Passport {
-	passport
-		.replace(' ', "\n")
-		.lines()
-		.fold(Passport::new(), |mut p, l| {
-			let mut kvp = l.split(':');
-			match kvp.next() {
-				Some("byr") => p.byr = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("iyr") => p.iyr = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("eyr") => p.eyr = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("hgt") => p.hgt = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("hcl") => p.hcl = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("ecl") => p.ecl = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("pid") => p.pid = Some(kvp.next().expect("Failed to get value").to_string()),
-				Some("cid") => p.cid = Some(kvp.next().expect("Failed to get value").to_string()),
-				_ => {}
-			};
-			p
-		})
+	passport.replace(' ', "\n").lines().fold(Passport::new(), |mut p, l| {
+		let mut kvp = l.split(':');
+		match kvp.next() {
+			Some("byr") => p.byr = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("iyr") => p.iyr = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("eyr") => p.eyr = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("hgt") => p.hgt = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("hcl") => p.hcl = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("ecl") => p.ecl = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("pid") => p.pid = Some(kvp.next().expect("Failed to get value").to_string()),
+			Some("cid") => p.cid = Some(kvp.next().expect("Failed to get value").to_string()),
+			_ => {}
+		};
+		p
+	})
 }
 
 fn parse_passport_batch(batch: &String) -> Vec<Passport> {
-	batch
-		.split("\n\n")
-		.map(|p| parse_passport(&p.to_string()))
-		.collect()
+	batch.split("\n\n").map(|p| parse_passport(&p.to_string())).collect()
 }
 
 pub fn part_01(input: &String) -> u64 {

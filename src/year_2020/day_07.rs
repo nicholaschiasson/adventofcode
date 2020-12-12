@@ -83,15 +83,10 @@ fn get_parents(rules: &HashMap<String, Rule>, parents: &mut HashSet<String>, nam
 }
 
 fn count_children(rules: &HashMap<String, Rule>, name: &String) -> u64 {
-	rules
-		.get(name)
-		.unwrap()
-		.children
-		.iter()
-		.fold(0, |n, (c, c_num)| {
-			let num = *c_num as u64;
-			n + num + num * count_children(rules, c)
-		})
+	rules.get(name).unwrap().children.iter().fold(0, |n, (c, c_num)| {
+		let num = *c_num as u64;
+		n + num + num * count_children(rules, c)
+	})
 }
 
 pub fn part_01(input: &String) -> u64 {

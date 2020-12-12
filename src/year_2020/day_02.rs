@@ -22,16 +22,10 @@ fn parse_policy(input: &String, authority: PolicyAuthority) -> PasswordPolicy {
 	let character = policy_str.split(' ').collect::<Vec<&str>>()[1];
 	PasswordPolicy {
 		authority,
-		character: character
-			.parse()
-			.expect("Failed to parse policy character."),
+		character: character.parse().expect("Failed to parse policy character."),
 		limits: OccurrenceLimits {
-			maximum: limits[1]
-				.parse()
-				.expect("Failed to parse policy maximum limit."),
-			minimum: limits[0]
-				.parse()
-				.expect("Failed to parse policy minimum limit."),
+			maximum: limits[1].parse().expect("Failed to parse policy maximum limit."),
+			minimum: limits[0].parse().expect("Failed to parse policy minimum limit."),
 		},
 	}
 }
@@ -43,9 +37,7 @@ fn parse_password(input: &String) -> String {
 fn validate_password(password: &String, policy: &PasswordPolicy) -> bool {
 	match policy.authority {
 		PolicyAuthority::SledRental => {
-			let occurrences = password
-				.chars()
-				.fold(0, |a, c| a + if c == policy.character { 1 } else { 0 });
+			let occurrences = password.chars().fold(0, |a, c| a + if c == policy.character { 1 } else { 0 });
 			occurrences >= policy.limits.minimum && occurrences <= policy.limits.maximum
 		}
 		PolicyAuthority::OfficialTobogganCorporate => {
@@ -66,11 +58,7 @@ pub fn part_01(input: &String) -> u64 {
 	for p in password_list {
 		let policy = parse_policy(&p, PolicyAuthority::SledRental);
 		let password = parse_password(&p);
-		valid_passwords += if validate_password(&password, &policy) {
-			1
-		} else {
-			0
-		};
+		valid_passwords += if validate_password(&password, &policy) { 1 } else { 0 };
 	}
 	valid_passwords
 }
@@ -81,11 +69,7 @@ pub fn part_02(input: &String) -> u64 {
 	for p in password_list {
 		let policy = parse_policy(&p, PolicyAuthority::OfficialTobogganCorporate);
 		let password = parse_password(&p);
-		valid_passwords += if validate_password(&password, &policy) {
-			1
-		} else {
-			0
-		};
+		valid_passwords += if validate_password(&password, &policy) { 1 } else { 0 };
 	}
 	valid_passwords
 }

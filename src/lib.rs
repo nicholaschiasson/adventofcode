@@ -53,10 +53,7 @@ mod tests {
 
 			#[test]
 			fn part_02() {
-				assert_eq!(
-					day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)),
-					265253940
-				);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 265253940);
 			}
 		}
 
@@ -90,10 +87,7 @@ mod tests {
 
 			#[test]
 			fn part_02() {
-				assert_eq!(
-					day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)),
-					7540141059
-				);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 7540141059);
 			}
 		}
 
@@ -190,18 +184,12 @@ mod tests {
 
 			#[test]
 			fn part_01() {
-				assert_eq!(
-					day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)),
-					3199139634
-				);
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 3199139634);
 			}
 
 			#[test]
 			fn part_02() {
-				assert_eq!(
-					day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)),
-					438559930
-				);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 438559930);
 			}
 		}
 
@@ -218,10 +206,7 @@ mod tests {
 
 			#[test]
 			fn part_02() {
-				assert_eq!(
-					day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)),
-					9256148959232
-				);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 9256148959232);
 			}
 		}
 

@@ -74,11 +74,7 @@ fn count_adjacent_occupancies(grid: &Vec<Vec<Space>>, position: Position, scan: 
 	count
 }
 
-fn compute_seating(
-	grid: &Vec<Vec<Space>>,
-	discomfort_threshold: u64,
-	scan: bool,
-) -> Vec<Vec<Space>> {
+fn compute_seating(grid: &Vec<Vec<Space>>, discomfort_threshold: u64, scan: bool) -> Vec<Vec<Space>> {
 	grid
 		.iter()
 		.enumerate()
@@ -96,9 +92,7 @@ fn compute_seating(
 						}
 					}
 					Space::OccupiedSeat => {
-						if count_adjacent_occupancies(grid, Position(i as isize, j as isize), scan)
-							< discomfort_threshold
-						{
+						if count_adjacent_occupancies(grid, Position(i as isize, j as isize), scan) < discomfort_threshold {
 							Space::OccupiedSeat
 						} else {
 							Space::EmptySeat
@@ -144,13 +138,10 @@ pub fn part_01(input: &String) -> u64 {
 			break;
 		}
 	}
-	grid.iter().flatten().fold(0, |n, s| {
-		if let Space::OccupiedSeat = s {
-			n + 1
-		} else {
-			n
-		}
-	})
+	grid
+		.iter()
+		.flatten()
+		.fold(0, |n, s| if let Space::OccupiedSeat = s { n + 1 } else { n })
 }
 
 pub fn part_02(input: &String) -> u64 {
@@ -162,11 +153,8 @@ pub fn part_02(input: &String) -> u64 {
 			break;
 		}
 	}
-	grid.iter().flatten().fold(0, |n, s| {
-		if let Space::OccupiedSeat = s {
-			n + 1
-		} else {
-			n
-		}
-	})
+	grid
+		.iter()
+		.flatten()
+		.fold(0, |n, s| if let Space::OccupiedSeat = s { n + 1 } else { n })
 }

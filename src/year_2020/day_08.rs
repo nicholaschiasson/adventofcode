@@ -87,10 +87,7 @@ impl Boot {
 }
 
 fn parse_instructions(instructions: &String) -> Vec<Instruction> {
-	instructions
-		.lines()
-		.map(|l| l.parse::<Instruction>().unwrap())
-		.collect()
+	instructions.lines().map(|l| l.parse::<Instruction>().unwrap()).collect()
 }
 
 pub fn part_01(input: &String) -> u64 {

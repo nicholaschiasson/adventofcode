@@ -1,28 +1,18 @@
 use std::collections::HashMap;
 
 pub fn part_01(input: &String) -> u64 {
-	let mut adapters = input
-		.lines()
-		.map(|l| l.parse::<u64>().unwrap())
-		.collect::<Vec<u64>>();
+	let mut adapters = input.lines().map(|l| l.parse::<u64>().unwrap()).collect::<Vec<u64>>();
 	adapters.sort();
 	let mut differences = [0u64; 3];
 	for i in 0..adapters.len() {
-		let difference = if i == 0 {
-			adapters[i]
-		} else {
-			adapters[i] - adapters[i - 1]
-		};
+		let difference = if i == 0 { adapters[i] } else { adapters[i] - adapters[i - 1] };
 		differences[difference as usize - 1] += 1;
 	}
 	differences[0] * (differences[2] + 1)
 }
 
 pub fn part_02(input: &String) -> u64 {
-	let mut adapters = input
-		.lines()
-		.map(|l| l.parse::<u64>().unwrap())
-		.collect::<Vec<u64>>();
+	let mut adapters = input.lines().map(|l| l.parse::<u64>().unwrap()).collect::<Vec<u64>>();
 	adapters.push(0);
 	adapters.push(adapters.iter().max().unwrap() + 3);
 	adapters.sort_by(|a, b| b.cmp(a));

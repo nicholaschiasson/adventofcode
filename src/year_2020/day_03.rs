@@ -8,13 +8,7 @@ fn count_collisions(grid: &String, slope: &Slope) -> u64 {
 	grid
 		.lines()
 		.enumerate()
-		.filter_map(|(i, r)| {
-			if i as i32 % slope.down == 0 {
-				Some(r)
-			} else {
-				None
-			}
-		})
+		.filter_map(|(i, r)| if i as i32 % slope.down == 0 { Some(r) } else { None })
 		.fold(0, |trees, row| {
 			let previous_position = position;
 			position += slope.right;
