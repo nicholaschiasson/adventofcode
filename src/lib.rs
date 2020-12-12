@@ -224,5 +224,22 @@ mod tests {
 				);
 			}
 		}
+
+		#[cfg(test)]
+		mod day_11 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_11 as day;
+			const DAY_NUM: u8 = 11;
+
+			#[test]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 2470);
+			}
+
+			#[test]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 2259);
+			}
+		}
 	}
 }
