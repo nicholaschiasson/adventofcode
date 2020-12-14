@@ -1,12 +1,6 @@
-use num::Integer;
 use std::{convert::TryFrom, str::FromStr};
 
-fn modulo<T>(a: T, b: T) -> T
-where
-	T: Copy + Integer + std::ops::Rem<Output = T>,
-{
-	((a % b) + b) % b
-}
+use crate::utils::modulo;
 
 #[derive(Clone, Copy, Debug)]
 struct Vector(Direction, Point);

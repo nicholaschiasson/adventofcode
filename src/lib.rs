@@ -1,3 +1,4 @@
+pub mod utils;
 pub mod year_2019;
 pub mod year_2020;
 
@@ -256,9 +257,8 @@ mod tests {
 			}
 
 			#[test]
-			#[should_panic(expected = "DEFEAT")]
 			fn part_02() {
-				day::part_02(&read_input(super::YEAR_NUM, DAY_NUM));
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 741745043105674);
 			}
 		}
 	}
