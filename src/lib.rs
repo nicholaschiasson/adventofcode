@@ -275,7 +275,7 @@ mod tests {
 
 			#[test]
 			fn part_02() {
-				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 4753238784664);
 			}
 		}
 	}
