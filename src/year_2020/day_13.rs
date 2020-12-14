@@ -33,7 +33,11 @@ pub fn part_02(input: &String) -> u64 {
 
 	congruences.sort_by(|a, b| b.1.cmp(&a.1));
 
-	congruences.iter().skip(1).fold(congruences[0], |(a1, n), (a2, x)| {
-		(a1 + (0..).find(|i| (a1 + i * n) % x == *a2).unwrap() * n, n * x)
-	}).0
+	congruences
+		.iter()
+		.skip(1)
+		.fold(congruences[0], |(a1, n), (a2, x)| {
+			(a1 + (0..).find(|i| (a1 + i * n) % x == *a2).unwrap() * n, n * x)
+		})
+		.0
 }
