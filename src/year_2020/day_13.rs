@@ -34,14 +34,7 @@ pub fn part_02(input: &String) -> u64 {
 	congruences.sort_by(|a, b| b.1.cmp(&a.1));
 
 	let (x, _) = congruences.iter().skip(1).fold(congruences[0], |(a1, n), (a2, x)| {
-		let mut i = 0;
-		loop {
-			if (a1 + i * n) % x == *a2 {
-				break;
-			}
-			i += 1;
-		}
-		(a1 + i * n, n * x)
+		(a1 + (0..).find(|i| (a1 + i * n) % x == *a2).unwrap() * n, n * x)
 	});
 	x
 }
