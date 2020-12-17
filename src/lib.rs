@@ -299,7 +299,7 @@ mod tests {
 
 			#[test]
 			fn part_02() {
-				// Keep these all commented out since they each take ~50 seconds to finish
+				// // Keep these all commented out since they each take ~50 seconds to finish
 				// assert_eq!(day::part_02(&String::from("0,3,6")), 175594);
 				// assert_eq!(day::part_02(&String::from("1,3,2")), 2578);
 				// assert_eq!(day::part_02(&String::from("2,1,3")), 3544142);
@@ -308,6 +308,23 @@ mod tests {
 				// assert_eq!(day::part_02(&String::from("3,2,1")), 18);
 				// assert_eq!(day::part_02(&String::from("3,1,2")), 362);
 				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 1047739);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_16 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_16 as day;
+			const DAY_NUM: u8 = 16;
+
+			#[test]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 25895);
+			}
+
+			#[test]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 5865723727753);
 			}
 		}
 	}
