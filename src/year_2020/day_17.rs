@@ -29,7 +29,7 @@ struct Point3(i64, i64, i64);
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 struct Point4(i64, i64, i64, i64);
 
-trait Point: Eq+Hash+Sized {
+trait Point: Clone+Copy+Eq+Hash+Sized {
 	fn new(x: i64, y: i64) -> Self;
 	fn x(&self) -> i64;
 	fn y(&self) -> i64;
@@ -129,7 +129,7 @@ impl<T: Point> Space<T> {
 		self.grid.insert(point, active)
 	}
 
-	fn count_active_neighbours(&mut self, point: T) -> u64 {
+	fn count_active_neighbours(&self, point: &T) -> u64 {
 		let mut n = 0;
 		for x_off in -1..=1 {
 			for y_off in -1..=1 {
@@ -156,53 +156,7 @@ impl<T: Point> Space<T> {
 		}
 		n
 	}
-}
 
-impl Space<Point3> {
-	fn cycle(&mut self) {
-		let mut new_bounds_x = Bounds(0, 0);
-		let mut new_bounds_y = Bounds(0, 0);
-		let mut new_bounds_z = Bounds(0, 0);
-		let mut new_grid = HashMap::new();
-		for x in self.bounds_x.min() - 1..=self.bounds_x.max() + 1 {
-			for y in self.bounds_y.min() - 1..=self.bounds_y.max() + 1 {
-				for z in self.bounds_z.min() - 1..=self.bounds_z.max() + 1 {
-					let active_neighbours = self.count_active_neighbours(Point3(x, y, z));
-					if let Some(active) = self.grid.get(&Point3(x, y, z)) {
-						if *active {
-							if active_neighbours == 2 || active_neighbours == 3 {
-								new_grid.insert(Point3(x, y, z), true);
-							} else {
-								new_grid.insert(Point3(x, y, z), false);
-							}
-						} else {
-							if active_neighbours == 3 {
-								new_grid.insert(Point3(x, y, z), true);
-							} else {
-								new_grid.insert(Point3(x, y, z), false);
-							}
-						}
-					} else {
-						if active_neighbours == 3 {
-							new_grid.insert(Point3(x, y, z), true);
-						} else {
-							new_grid.insert(Point3(x, y, z), false);
-						}
-					}
-					new_bounds_x.expand(x);
-					new_bounds_y.expand(y);
-					new_bounds_z.expand(z);
-				}
-			}
-		}
-		self.bounds_x = new_bounds_x;
-		self.bounds_y = new_bounds_y;
-		self.bounds_z = new_bounds_z;
-		self.grid = new_grid;
-	}
-}
-
-impl Space<Point4> {
 	fn cycle(&mut self) {
 		let mut new_bounds_x = Bounds(0, 0);
 		let mut new_bounds_y = Bounds(0, 0);
@@ -213,32 +167,38 @@ impl Space<Point4> {
 			for y in self.bounds_y.min() - 1..=self.bounds_y.max() + 1 {
 				for z in self.bounds_z.min() - 1..=self.bounds_z.max() + 1 {
 					for w in self.bounds_w.min() - 1..=self.bounds_w.max() + 1 {
-						let active_neighbours = self.count_active_neighbours(Point4(x, y, z, w));
-						if let Some(active) = self.grid.get(&Point4(x, y, z, w)) {
+						let mut p = T::new(x, y);
+						p.set_z(z);
+						p.set_w(w);
+						let active_neighbours = self.count_active_neighbours(&p);
+						if let Some(active) = self.grid.get(&p) {
 							if *active {
 								if active_neighbours == 2 || active_neighbours == 3 {
-									new_grid.insert(Point4(x, y, z, w), true);
+									new_grid.insert(p, true);
 								} else {
-									new_grid.insert(Point4(x, y, z, w), false);
+									new_grid.insert(p, false);
 								}
 							} else {
 								if active_neighbours == 3 {
-									new_grid.insert(Point4(x, y, z, w), true);
+									new_grid.insert(p, true);
 								} else {
-									new_grid.insert(Point4(x, y, z, w), false);
+									new_grid.insert(p, false);
 								}
 							}
 						} else {
 							if active_neighbours == 3 {
-								new_grid.insert(Point4(x, y, z, w), true);
+								new_grid.insert(p, true);
 							} else {
-								new_grid.insert(Point4(x, y, z, w), false);
+								new_grid.insert(p, false);
 							}
 						}
 						new_bounds_x.expand(x);
 						new_bounds_y.expand(y);
 						new_bounds_z.expand(z);
 						new_bounds_w.expand(w);
+						if let None = p.w() {
+							break;
+						}
 					}
 				}
 			}
