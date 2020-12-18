@@ -35,6 +35,10 @@ trait Point: Eq+Hash+Sized {
 	fn y(&self) -> i64;
 	fn z(&self) -> i64;
 	fn w(&self) -> Option<i64>;
+	fn set_x(&mut self, x: i64);
+	fn set_y(&mut self, y: i64);
+	fn set_z(&mut self, z: i64);
+	fn set_w(&mut self, w: i64);
 }
 
 impl Point for Point3 {
@@ -53,6 +57,16 @@ impl Point for Point3 {
 	fn w(&self) -> Option<i64> {
 		None
 	}
+	fn set_x(&mut self, x: i64) {
+		self.0 = x;
+	}
+	fn set_y(&mut self, y: i64) {
+		self.1 = y;
+	}
+	fn set_z(&mut self, z: i64) {
+		self.2 = z;
+	}
+	fn set_w(&mut self, _: i64) {}
 }
 
 impl Point for Point4 {
@@ -70,6 +84,18 @@ impl Point for Point4 {
 	}
 	fn w(&self) -> Option<i64> {
 		Some(self.3)
+	}
+	fn set_x(&mut self, x: i64) {
+		self.0 = x;
+	}
+	fn set_y(&mut self, y: i64) {
+		self.1 = y;
+	}
+	fn set_z(&mut self, z: i64) {
+		self.2 = z;
+	}
+	fn set_w(&mut self, w: i64) {
+		self.3 = w;
 	}
 }
 
@@ -102,18 +128,26 @@ impl<T: Point> Space<T> {
 		}
 		self.grid.insert(point, active)
 	}
-}
 
-impl Space<Point3> {
-	fn count_active_neighbours(&mut self, Point3(x, y, z): Point3) -> u64 {
+	fn count_active_neighbours(&mut self, point: T) -> u64 {
 		let mut n = 0;
 		for x_off in -1..=1 {
 			for y_off in -1..=1 {
 				for z_off in -1..=1 {
-					if x_off != 0 || y_off != 0 || z_off != 0 {
-						if let Some(active) = self.grid.get(&Point3(x + x_off, y + y_off, z + z_off)) {
-							if *active {
-								n += 1;
+					for w_off in -1..=1 {
+						if x_off != 0 || y_off != 0 || z_off != 0 || (point.w().is_some() && w_off != 0) {
+							let mut p = T::new(point.x() + x_off, point.y() + y_off);
+							p.set_z(point.z() + z_off);
+							if let Some(w) = point.w() {
+								p.set_w(w + w_off);
+							}
+							if let Some(active) = self.grid.get(&p) {
+								if *active {
+									n += 1;
+								}
+							}
+							if let None = point.w() {
+								break;
 							}
 						}
 					}
@@ -122,7 +156,9 @@ impl Space<Point3> {
 		}
 		n
 	}
+}
 
+impl Space<Point3> {
 	fn cycle(&mut self) {
 		let mut new_bounds_x = Bounds(0, 0);
 		let mut new_bounds_y = Bounds(0, 0);
@@ -167,26 +203,6 @@ impl Space<Point3> {
 }
 
 impl Space<Point4> {
-	fn count_active_neighbours(&mut self, Point4(x, y, z, w): Point4) -> u64 {
-		let mut n = 0;
-		for x_off in -1..=1 {
-			for y_off in -1..=1 {
-				for z_off in -1..=1 {
-					for w_off in -1..=1 {
-						if x_off != 0 || y_off != 0 || z_off != 0 || w_off != 0 {
-							if let Some(active) = self.grid.get(&Point4(x + x_off, y + y_off, z + z_off, w + w_off)) {
-								if *active {
-									n += 1;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		n
-	}
-
 	fn cycle(&mut self) {
 		let mut new_bounds_x = Bounds(0, 0);
 		let mut new_bounds_y = Bounds(0, 0);
