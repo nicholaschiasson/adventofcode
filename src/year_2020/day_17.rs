@@ -211,29 +211,41 @@ impl<T: Point> Space<T> {
 	}
 }
 
-impl Display for Space<Point3> {
+impl<T: Point> Display for Space<T> {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		for z in self.bounds_z.min()..=self.bounds_z.max() {
-			write!(f, "z={}\n", z)?;
-			for y in self.bounds_y.min()..=self.bounds_y.max() {
-				for x in self.bounds_x.min()..=self.bounds_x.max() {
-					write!(
-						f,
-						"{}",
-						if let Some(active) = self.grid.get(&Point3(x, y, z)) {
-							if *active {
-								"#"
+		for w in self.bounds_w.min()..=self.bounds_w.max() {
+			for z in self.bounds_z.min()..=self.bounds_z.max() {
+				if T::new(0, 0).w().is_none() {
+					write!(f, "z={}\n", z)?;
+				} else {
+					write!(f, "z={}, w={}\n", z, w)?;
+				}
+				for y in self.bounds_y.min()..=self.bounds_y.max() {
+					for x in self.bounds_x.min()..=self.bounds_x.max() {
+						let mut p = T::new(x, y);
+						p.set_z(z);
+						p.set_w(w);
+						write!(
+							f,
+							"{}",
+							if let Some(active) = self.grid.get(&p) {
+								if *active {
+									"#"
+								} else {
+									"."
+								}
 							} else {
 								"."
 							}
-						} else {
-							"."
-						}
-					)?;
+						)?;
+					}
+					write!(f, "\n")?;
 				}
 				write!(f, "\n")?;
 			}
-			write!(f, "\n")?;
+			if T::new(0, 0).w().is_none() {
+				break;
+			}
 		}
 		Ok(())
 	}
