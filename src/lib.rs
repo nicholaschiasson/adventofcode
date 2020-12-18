@@ -344,5 +344,157 @@ mod tests {
 				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 1380);
 			}
 		}
+
+		#[cfg(test)]
+		mod day_18 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_18 as day;
+			const DAY_NUM: u8 = 18;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_19 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_19 as day;
+			const DAY_NUM: u8 = 19;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_20 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_20 as day;
+			const DAY_NUM: u8 = 20;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_21 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_21 as day;
+			const DAY_NUM: u8 = 21;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_22 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_22 as day;
+			const DAY_NUM: u8 = 22;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_23 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_23 as day;
+			const DAY_NUM: u8 = 23;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_24 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_24 as day;
+			const DAY_NUM: u8 = 24;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
+
+		#[cfg(test)]
+		mod day_25 {
+			use crate::tests::read_input;
+			use crate::year_2020::day_25 as day;
+			const DAY_NUM: u8 = 25;
+
+			#[test]
+			#[should_panic]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+
+			#[test]
+			#[should_panic]
+			fn part_02() {
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+			}
+		}
 	}
 }
