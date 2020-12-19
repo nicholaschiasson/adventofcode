@@ -29,7 +29,7 @@ struct Point3(i64, i64, i64);
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 struct Point4(i64, i64, i64, i64);
 
-trait Point: Clone+Copy+Eq+Hash+Sized {
+trait Point: Clone + Copy + Eq + Hash + Sized {
 	fn new(x: i64, y: i64) -> Self;
 	fn x(&self) -> i64;
 	fn y(&self) -> i64;

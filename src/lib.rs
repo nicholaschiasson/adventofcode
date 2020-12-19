@@ -352,15 +352,13 @@ mod tests {
 			const DAY_NUM: u8 = 18;
 
 			#[test]
-			#[should_panic]
 			fn part_01() {
-				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 202553439706);
 			}
 
 			#[test]
-			#[should_panic]
 			fn part_02() {
-				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 88534268715686);
 			}
 		}
 
