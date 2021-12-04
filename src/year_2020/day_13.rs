@@ -6,6 +6,7 @@ pub fn part_01(input: &String) -> u64 {
 	let (earliest_departure, i) = parse_partial::<u64, _>(input.as_bytes()).unwrap();
 	let (time, id) = input.as_str()[i + 1..]
 		.split(',')
+		.map(|s| s.trim())
 		.filter(|s| s != &"x")
 		.map(|s| s.parse::<u64>().unwrap())
 		.fold((2 * earliest_departure, 0), |(t, i), id| {
@@ -21,7 +22,7 @@ pub fn part_01(input: &String) -> u64 {
 
 pub fn part_02(input: &String) -> u64 {
 	let (_, i) = parse_partial::<u64, _>(input.as_bytes()).unwrap();
-	let ids = input.as_str()[i + 1..].split(',').collect::<Vec<&str>>();
+	let ids = input.as_str()[i + 1..].split(',').map(|s| s.trim()).collect::<Vec<&str>>();
 
 	let mut congruences = ids
 		.iter()

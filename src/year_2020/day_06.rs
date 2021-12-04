@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 
 pub fn part_01(input: &String) -> u64 {
-	input.split("\n\n").fold(0, |n, group| {
+	input.lines().collect::<Vec<_>>().join("\n").split("\n\n").fold(0, |n, group| {
 		n + group
 			.lines()
 			.flat_map(|answer| answer.chars())
@@ -12,7 +12,7 @@ pub fn part_01(input: &String) -> u64 {
 }
 
 pub fn part_02(input: &String) -> u64 {
-	input.split("\n\n").fold(0, |n, group| {
+	input.lines().collect::<Vec<_>>().join("\n").split("\n\n").fold(0, |n, group| {
 		n + group
 			.lines()
 			.flat_map(|answer| answer.chars())

@@ -1,6 +1,6 @@
 pub fn part_01(input: &String) -> u64 {
 	let expenses: Vec<u64> = input
-		.split('\n')
+		.lines()
 		.map(|e| e.parse::<u64>().expect("Failed to parse input"))
 		.collect();
 	for i in (1..expenses.len()).rev() {
@@ -15,7 +15,7 @@ pub fn part_01(input: &String) -> u64 {
 
 pub fn part_02(input: &String) -> u64 {
 	let expenses: Vec<u64> = input
-		.split('\n')
+		.lines()
 		.map(|e| e.parse::<u64>().expect("Failed to parse input"))
 		.collect();
 	for i in (2..expenses.len()).rev() {

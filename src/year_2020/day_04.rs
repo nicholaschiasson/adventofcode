@@ -141,7 +141,7 @@ fn parse_passport(passport: &String) -> Passport {
 }
 
 fn parse_passport_batch(batch: &String) -> Vec<Passport> {
-	batch.split("\n\n").map(|p| parse_passport(&p.to_string())).collect()
+	batch.lines().collect::<Vec<_>>().join("\n").split("\n\n").map(|p| parse_passport(&p.to_string())).collect()
 }
 
 pub fn part_01(input: &String) -> u64 {

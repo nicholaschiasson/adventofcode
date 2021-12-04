@@ -1,5 +1,5 @@
 [package]
-name = "adventofcode2020"
+name = "adventofcode"
 version = "0.1.0"
 authors = ["Nicholas Omer Chiasson <nicholasomerchiasson@gmail.com>"]
 edition = "2018"
@@ -7,6 +7,6 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-lexical = "5.2.0"
+lexical = "6.0.1"
 num = "0.3.1"
 regex = "1.4.2"
