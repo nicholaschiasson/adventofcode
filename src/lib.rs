@@ -14,6 +14,8 @@ mod tests {
 				.join(format!("rsrc/{}/input_{:0>2}.txt", year_number, day_number)),
 		)
 		.expect("Failed to read file")
+		.trim()
+		.to_string()
 	}
 
 	#[cfg(test)]
@@ -543,7 +545,7 @@ mod tests {
 
 			#[test]
 			fn part_01() {
-				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 0);
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 2743844);
 			}
 
 			#[test]
