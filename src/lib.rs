@@ -604,5 +604,23 @@ mod tests {
 				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 1617359101538);
 			}
 		}
+
+		#[cfg(test)]
+		mod day_07 {
+			use crate::tests::read_input;
+			use crate::year_2021::day_07 as day;
+			const DAY_NUM: u8 = 7;
+
+			#[test]
+			fn part_01() {
+				assert_eq!(day::part_01(&read_input(super::YEAR_NUM, DAY_NUM)), 355989);
+			}
+
+			#[test]
+			fn part_02() {
+				assert_eq!(day::part_02(&String::from("16,1,2,0,4,2,7,1,2,14")), 168);
+				assert_eq!(day::part_02(&read_input(super::YEAR_NUM, DAY_NUM)), 102245489);
+			}
+		}
 	}
 }
