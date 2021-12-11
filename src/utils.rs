@@ -9,13 +9,6 @@ where
 }
 
 pub fn read_resource(relative_path: PathBuf) -> String {
-	println!(
-		"{:?}",
-		env::current_dir()
-			.expect("Failed to get current directory")
-			.join("rsrc")
-			.join(&relative_path)
-	);
 	fs::read_to_string(
 		env::current_dir()
 			.expect("Failed to get current directory")
