@@ -276,3 +276,20 @@ pub fn part_02(input: &String) -> u64 {
 	}
 	space.grid.values().fold(0, |sum, active| if *active { sum + 1 } else { sum })
 }
+
+#[cfg(test)]
+mod tests {
+	use crate::utils::{read_resource, relative_input_path};
+
+	const INPUT_PATH: &str = module_path!();
+
+	#[test]
+	fn part_01() {
+		assert_eq!(super::part_01(&read_resource(relative_input_path(INPUT_PATH))), 269);
+	}
+
+	#[test]
+	fn part_02() {
+		assert_eq!(super::part_02(&read_resource(relative_input_path(INPUT_PATH))), 1380);
+	}
+}

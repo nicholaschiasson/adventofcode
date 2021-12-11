@@ -94,3 +94,22 @@ pub fn part_02(input: &String) -> u64 {
 	}
 	u64::from_str_radix(oxygen_lines[0], 2).unwrap() * u64::from_str_radix(c02_lines[0], 2).unwrap()
 }
+
+#[cfg(test)]
+mod tests {
+	use crate::utils::{read_resource, relative_input_path};
+
+	const INPUT_PATH: &str = module_path!();
+
+	#[test]
+	#[should_panic]
+	fn part_01() {
+		assert_eq!(super::part_01(&read_resource(relative_input_path(INPUT_PATH))), 2743844);
+	}
+
+	#[test]
+	#[should_panic]
+	fn part_02() {
+		assert_eq!(super::part_02(&read_resource(relative_input_path(INPUT_PATH))), 6677951);
+	}
+}

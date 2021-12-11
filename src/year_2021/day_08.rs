@@ -1,8 +1,9 @@
-pub fn part_01(_input: &String) -> u64 {
+pub fn part_01(input: &String) -> u64 {
+	println!("{}", std::module_path!());
 	todo!()
 }
 
-pub fn part_02(_input: &String) -> u64 {
+pub fn part_02(input: &String) -> u64 {
 	todo!()
 }
 

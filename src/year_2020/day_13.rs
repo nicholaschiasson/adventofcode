@@ -42,3 +42,23 @@ pub fn part_02(input: &String) -> u64 {
 		})
 		.0
 }
+
+#[cfg(test)]
+mod tests {
+	use crate::utils::{read_resource, relative_input_path};
+
+	const INPUT_PATH: &str = module_path!();
+
+	#[test]
+	fn part_01() {
+		assert_eq!(super::part_01(&read_resource(relative_input_path(INPUT_PATH))), 4808);
+	}
+
+	#[test]
+	fn part_02() {
+		assert_eq!(
+			super::part_02(&read_resource(relative_input_path(INPUT_PATH))),
+			741745043105674
+		);
+	}
+}

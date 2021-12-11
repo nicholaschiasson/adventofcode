@@ -158,3 +158,20 @@ pub fn part_02(input: &String) -> u64 {
 		.flatten()
 		.fold(0, |n, s| if let Space::OccupiedSeat = s { n + 1 } else { n })
 }
+
+#[cfg(test)]
+mod tests {
+	use crate::utils::{read_resource, relative_input_path};
+
+	const INPUT_PATH: &str = module_path!();
+
+	#[test]
+	fn part_01() {
+		assert_eq!(super::part_01(&read_resource(relative_input_path(INPUT_PATH))), 2470);
+	}
+
+	#[test]
+	fn part_02() {
+		assert_eq!(super::part_02(&read_resource(relative_input_path(INPUT_PATH))), 2259);
+	}
+}
