@@ -97,12 +97,11 @@ impl SignalMapping {
 	}
 
 	fn map_signal(&self, signal: Signal) -> u8 {
-		let segments = self.segments.iter().flatten().map(|&c| c).collect::<Vec<_>>();
 		Signal(
 			&signal
 				.0
 				.chars()
-				.map(|c| (segments.iter().position(|&s| s == c).unwrap() as u8 + b'a') as char)
+				.map(|c| (self.segments.iter().flatten().position(|&s| s == c).unwrap() as u8 + b'a') as char)
 				.collect::<String>(),
 		)
 		.into()
