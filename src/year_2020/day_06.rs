@@ -44,11 +44,13 @@ mod tests {
 
 	#[test]
 	fn part_01() {
-		assert_eq!(super::part_01(&read_resource(relative_input_path(INPUT_PATH))), 6763);
+		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))), 11);
+		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))), 6763);
 	}
 
 	#[test]
 	fn part_02() {
-		assert_eq!(super::part_02(&read_resource(relative_input_path(INPUT_PATH))), 3512);
+		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))), 6);
+		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))), 3512);
 	}
 }

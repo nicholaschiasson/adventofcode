@@ -24,11 +24,6 @@ pub fn relative_input_path(module_path: &str) -> PathBuf {
 	module_path
 		.split("::")
 		.skip(1) // removing leading module name which is crate name
-		.collect::<Vec<_>>()
-		.split_last() // removing tests module name
-		.unwrap()
-		.1
-		.iter()
 		.fold(PathBuf::from("inputs"), |p, s| p.join(s)) // prepend with 'inputs'
 		.with_extension("txt")
 }

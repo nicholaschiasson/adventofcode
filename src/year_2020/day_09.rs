@@ -16,14 +16,14 @@ fn find_outlier(sequence: &Vec<i64>, preamble: usize) -> i64 {
 		.unwrap()
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &String, preamble: usize) -> u64 {
 	let sequence = input.lines().map(|l| l.parse::<i64>().unwrap()).collect::<Vec<_>>();
-	find_outlier(&sequence, 25) as u64
+	find_outlier(&sequence, preamble) as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &String, preamble: usize) -> u64 {
 	let sequence = input.lines().map(|l| l.parse::<i64>().unwrap()).collect::<Vec<_>>();
-	let outlier = find_outlier(&sequence, 25);
+	let outlier = find_outlier(&sequence, preamble);
 	let outlier_idx = sequence.iter().position(|n| *n == outlier).unwrap();
 	for i in 0..(outlier_idx - 2) {
 		let mut sum = sequence[i];
@@ -56,11 +56,13 @@ mod tests {
 
 	#[test]
 	fn part_01() {
-		assert_eq!(super::part_01(&read_resource(relative_input_path(INPUT_PATH))), 3199139634);
+		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH))), 5), 127);
+		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH))), 25), 3199139634);
 	}
 
 	#[test]
 	fn part_02() {
-		assert_eq!(super::part_02(&read_resource(relative_input_path(INPUT_PATH))), 438559930);
+		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH))), 5), 62);
+		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH))), 25), 438559930);
 	}
 }
