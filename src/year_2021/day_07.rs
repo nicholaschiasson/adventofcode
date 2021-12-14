@@ -27,14 +27,26 @@ mod tests {
 
 	#[test]
 	fn part_01() {
-		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))), 37);
-		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))), 355989);
+		assert_eq!(
+			super::part_01(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))),
+			37
+		);
+		assert_eq!(
+			super::part_01(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))),
+			355989
+		);
 	}
 
 	#[test]
 	fn part_02() {
 		assert_eq!(super::part_02(&String::from("16,1,2,0,4,2,7,1,2,14")), 168);
-		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))), 168);
-		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))), 102245489);
+		assert_eq!(
+			super::part_02(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))),
+			168
+		);
+		assert_eq!(
+			super::part_02(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))),
+			102245489
+		);
 	}
 }

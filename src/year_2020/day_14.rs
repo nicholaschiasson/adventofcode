@@ -90,16 +90,31 @@ mod tests {
 
 	#[test]
 	fn part_01() {
-		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))), 165);
-		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::practice_02", INPUT_PATH)))), 51);
-		assert_eq!(super::part_01(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))), 8332632930672);
+		assert_eq!(
+			super::part_01(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))),
+			165
+		);
+		assert_eq!(
+			super::part_01(&read_resource(relative_input_path(&format!("{}::practice_02", INPUT_PATH)))),
+			51
+		);
+		assert_eq!(
+			super::part_01(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))),
+			8332632930672
+		);
 	}
 
 	#[test]
 	fn part_02() {
 		// // Keep commented, this one is not meant to work.
 		// assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::practice_01", INPUT_PATH)))), );
-		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::practice_02", INPUT_PATH)))), 208);
-		assert_eq!(super::part_02(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))), 4753238784664);
+		assert_eq!(
+			super::part_02(&read_resource(relative_input_path(&format!("{}::practice_02", INPUT_PATH)))),
+			208
+		);
+		assert_eq!(
+			super::part_02(&read_resource(relative_input_path(&format!("{}::final", INPUT_PATH)))),
+			4753238784664
+		);
 	}
 }
