@@ -1,4 +1,4 @@
-use std::fmt::{write, Display};
+use std::fmt::Display;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum Chunk {
@@ -32,21 +32,6 @@ impl Chunk {
 enum Enclosing {
 	Closing(Chunk),
 	Opening(Chunk),
-}
-
-impl Enclosing {
-	fn get_counterpart(&self) -> Self {
-		match self {
-			Self::Opening(Chunk::Angle) => Self::Closing(Chunk::Angle),
-			Self::Opening(Chunk::Brace) => Self::Closing(Chunk::Brace),
-			Self::Opening(Chunk::Paranthesis) => Self::Closing(Chunk::Paranthesis),
-			Self::Opening(Chunk::Square) => Self::Closing(Chunk::Square),
-			Self::Closing(Chunk::Angle) => Self::Opening(Chunk::Angle),
-			Self::Closing(Chunk::Brace) => Self::Opening(Chunk::Brace),
-			Self::Closing(Chunk::Paranthesis) => Self::Opening(Chunk::Paranthesis),
-			Self::Closing(Chunk::Square) => Self::Opening(Chunk::Square),
-		}
-	}
 }
 
 impl Display for Enclosing {
