@@ -6,8 +6,7 @@ use std::{
 type Rules = HashMap<String, Vec<RangeInclusive<u64>>>;
 
 fn parse_input(input: &String) -> (Rules, Vec<u64>, Vec<Vec<u64>>) {
-	let rejoined = input.lines().collect::<Vec<_>>().join("\n");
-	let input_split = rejoined.split("\n\n").collect::<Vec<_>>();
+	let input_split = input.split("\n\n").collect::<Vec<_>>();
 	(
 		parse_rules(&input_split[0].to_string()),
 		parse_tickets(&input_split[1].to_string())[0].clone(),

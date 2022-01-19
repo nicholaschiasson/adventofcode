@@ -79,8 +79,7 @@ impl FromStr for Board {
 }
 
 pub fn part_01(input: &String) -> u64 {
-	let input_lf = input.lines().collect::<Vec<_>>().join("\n");
-	let draw = input_lf
+	let draw = input
 		.split("\n\n")
 		.take(1)
 		.next()
@@ -88,7 +87,7 @@ pub fn part_01(input: &String) -> u64 {
 		.split(',')
 		.map(|d| d.parse::<i32>().unwrap())
 		.collect::<Vec<_>>();
-	let mut boards = input_lf
+	let mut boards = input
 		.split("\n\n")
 		.skip(1)
 		.map(|b| b.parse::<Board>().unwrap())
@@ -108,8 +107,7 @@ pub fn part_01(input: &String) -> u64 {
 }
 
 pub fn part_02(input: &String) -> u64 {
-	let input_lf = input.lines().collect::<Vec<_>>().join("\n");
-	let draw = input_lf
+	let draw = input
 		.split("\n\n")
 		.take(1)
 		.next()
@@ -117,7 +115,7 @@ pub fn part_02(input: &String) -> u64 {
 		.split(',')
 		.map(|d| d.parse::<i32>().unwrap())
 		.collect::<Vec<_>>();
-	let mut boards = input_lf
+	let mut boards = input
 		.split("\n\n")
 		.skip(1)
 		.map(|b| b.parse::<Board>().unwrap())

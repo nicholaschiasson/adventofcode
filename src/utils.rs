@@ -17,6 +17,9 @@ pub fn read_resource(relative_path: PathBuf) -> String {
 	)
 	.expect("Failed to read file")
 	.trim()
+	.lines()
+	.collect::<Vec<_>>()
+	.join("\n")
 	.to_string()
 }
 

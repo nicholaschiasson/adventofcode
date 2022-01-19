@@ -82,9 +82,8 @@ impl FromStr for Paper {
 }
 
 pub fn part_01(input: &String) -> u64 {
-	let input_lf = input.lines().collect::<Vec<_>>().join("\n");
-	let paper = input_lf.split("\n\n").take(1).next().unwrap().parse::<Paper>().unwrap();
-	let folds = input_lf
+	let paper = input.split("\n\n").take(1).next().unwrap().parse::<Paper>().unwrap();
+	let folds = input
 		.split("\n\n")
 		.skip(1)
 		.next()
@@ -96,9 +95,8 @@ pub fn part_01(input: &String) -> u64 {
 }
 
 pub fn part_02(input: &String) -> u64 {
-	let input_lf = input.lines().collect::<Vec<_>>().join("\n");
-	let paper = input_lf.split("\n\n").take(1).next().unwrap().parse::<Paper>().unwrap();
-	let folds = input_lf
+	let paper = input.split("\n\n").take(1).next().unwrap().parse::<Paper>().unwrap();
+	let folds = input
 		.split("\n\n")
 		.skip(1)
 		.next()

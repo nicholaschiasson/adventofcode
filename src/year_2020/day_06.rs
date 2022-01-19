@@ -3,9 +3,6 @@ use std::collections::HashSet;
 
 pub fn part_01(input: &String) -> u64 {
 	input
-		.lines()
-		.collect::<Vec<_>>()
-		.join("\n")
 		.split("\n\n")
 		.fold(0, |n, group| {
 			n + group
@@ -18,9 +15,6 @@ pub fn part_01(input: &String) -> u64 {
 
 pub fn part_02(input: &String) -> u64 {
 	input
-		.lines()
-		.collect::<Vec<_>>()
-		.join("\n")
 		.split("\n\n")
 		.fold(0, |n, group| {
 			n + group
