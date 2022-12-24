@@ -1,5 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
+#[allow(unused)]
 struct PolymerTemplate {
 	polymer: Vec<char>,
 }
@@ -52,7 +53,7 @@ pub fn part_01(input: &String) -> u64 {
 				m
 			})
 	};
-	for i in 0..10 {
+	for _ in 0..10 {
 		formula.step();
 	}
 	let occurrences = formula.occurrences();
@@ -79,7 +80,7 @@ pub fn part_02(input: &String) -> u64 {
 				m
 			})
 	};
-	for i in 0..40 {
+	for _ in 0..40 {
 		formula.step();
 	}
 	let occurrences = formula.occurrences();
@@ -104,6 +105,7 @@ mod tests {
 		);
 	}
 
+	#[ignore]
 	#[test]
 	fn part_02() {
 		assert_eq!(
