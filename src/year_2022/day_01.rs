@@ -1,10 +1,11 @@
 pub fn part_01(input: &String) -> u64 {
 	input
 		.split("\n\n")
-		.map(|e| e
-			.lines()
-			.map(|c| c.parse::<u64>().expect("parse number of calories from string"))
-			.sum())
+		.map(|e| {
+			e.lines()
+				.map(|c| c.parse::<u64>().expect("parse number of calories from string"))
+				.sum()
+		})
 		.max()
 		.unwrap()
 }
@@ -12,17 +13,14 @@ pub fn part_01(input: &String) -> u64 {
 pub fn part_02(input: &String) -> u64 {
 	let mut calories: Vec<u64> = input
 		.split("\n\n")
-		.map(|e| e
-			.lines()
-			.map(|c| c.parse::<u64>().expect("parse number of calories from string"))
-			.sum())
+		.map(|e| {
+			e.lines()
+				.map(|c| c.parse::<u64>().expect("parse number of calories from string"))
+				.sum()
+		})
 		.collect();
 	calories.sort();
-	calories
-		.iter()
-		.rev()
-		.take(3)
-		.sum()
+	calories.iter().rev().take(3).sum()
 }
 
 #[cfg(test)]

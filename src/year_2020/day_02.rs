@@ -39,7 +39,7 @@ fn validate_password(password: &String, policy: &PasswordPolicy) -> bool {
 		PolicyAuthority::SledRental => {
 			let occurrences = password.chars().fold(0, |a, c| a + if c == policy.character { 1 } else { 0 });
 			occurrences >= policy.limits.minimum && occurrences <= policy.limits.maximum
-		}
+		},
 		PolicyAuthority::OfficialTobogganCorporate => {
 			let char_arr: Vec<char> = password.chars().collect();
 			(policy.limits.minimum as usize <= char_arr.len()
@@ -48,7 +48,7 @@ fn validate_password(password: &String, policy: &PasswordPolicy) -> bool {
 				|| (policy.limits.maximum as usize <= char_arr.len()
 					&& char_arr[policy.limits.minimum as usize - 1] != policy.character
 					&& char_arr[policy.limits.maximum as usize - 1] == policy.character)
-		}
+		},
 	}
 }
 

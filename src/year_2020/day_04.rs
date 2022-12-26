@@ -64,11 +64,11 @@ impl Passport {
 					Some("cm") => {
 						let h = c.get(1).map_or(0, |m| m.as_str().parse::<u32>().unwrap());
 						h >= 150 && h <= 193
-					}
+					},
 					Some("in") => {
 						let h = c.get(1).map_or(0, |m| m.as_str().parse::<u32>().unwrap());
 						h >= 59 && h <= 76
-					}
+					},
 					_ => false,
 				},
 				_ => false,
@@ -134,17 +134,14 @@ fn parse_passport(passport: &String) -> Passport {
 			Some("ecl") => p.ecl = Some(kvp.next().expect("Failed to get value").to_string()),
 			Some("pid") => p.pid = Some(kvp.next().expect("Failed to get value").to_string()),
 			Some("cid") => p.cid = Some(kvp.next().expect("Failed to get value").to_string()),
-			_ => {}
+			_ => {},
 		};
 		p
 	})
 }
 
 fn parse_passport_batch(batch: &String) -> Vec<Passport> {
-	batch
-		.split("\n\n")
-		.map(|p| parse_passport(&p.to_string()))
-		.collect()
+	batch.split("\n\n").map(|p| parse_passport(&p.to_string())).collect()
 }
 
 pub fn part_01(input: &String) -> u64 {

@@ -13,17 +13,15 @@ struct PolymerFormula {
 impl PolymerFormula {
 	fn occurrences(&self) -> HashMap<char, usize> {
 		let elements = self.template.iter().collect::<HashSet<_>>();
-		elements
-			.iter()
-			.fold(HashMap::new(), |mut m, &e| {
-				m.insert(*e, self.template.iter().filter(|&c| c == e).count());
-				m
-			})
+		elements.iter().fold(HashMap::new(), |mut m, &e| {
+			m.insert(*e, self.template.iter().filter(|&c| c == e).count());
+			m
+		})
 	}
 
 	fn step(&mut self) {
 		let mut new_template = Vec::new();
-		for i in 0 .. self.template.len() {
+		for i in 0..self.template.len() {
 			new_template.push(self.template[i]);
 			if i < self.template.len() - 1 {
 				new_template.push(*self.insertion_rules.get(&(self.template[i], self.template[i + 1])).unwrap());
@@ -35,23 +33,15 @@ impl PolymerFormula {
 
 pub fn part_01(input: &String) -> u64 {
 	let mut formula = PolymerFormula {
-		template: input
-			.split("\n\n")
-			.take(1)
-			.next()
-			.unwrap()
-			.chars()
-			.collect::<Vec<_>>(),
-		insertion_rules: input
-			.split("\n\n")
-			.last()
-			.unwrap()
-			.lines()
-			.fold(HashMap::new(), |mut m, r| {
-				let (k, v) = r.split_once(" -> ").unwrap();
-				m.insert((k.chars().nth(0).unwrap(), k.chars().nth(1).unwrap()), v.chars().nth(0).unwrap());
-				m
-			})
+		template: input.split("\n\n").take(1).next().unwrap().chars().collect::<Vec<_>>(),
+		insertion_rules: input.split("\n\n").last().unwrap().lines().fold(HashMap::new(), |mut m, r| {
+			let (k, v) = r.split_once(" -> ").unwrap();
+			m.insert(
+				(k.chars().nth(0).unwrap(), k.chars().nth(1).unwrap()),
+				v.chars().nth(0).unwrap(),
+			);
+			m
+		}),
 	};
 	for _ in 0..10 {
 		formula.step();
@@ -62,23 +52,15 @@ pub fn part_01(input: &String) -> u64 {
 
 pub fn part_02(input: &String) -> u64 {
 	let mut formula = PolymerFormula {
-		template: input
-			.split("\n\n")
-			.take(1)
-			.next()
-			.unwrap()
-			.chars()
-			.collect::<Vec<_>>(),
-		insertion_rules: input
-			.split("\n\n")
-			.last()
-			.unwrap()
-			.lines()
-			.fold(HashMap::new(), |mut m, r| {
-				let (k, v) = r.split_once(" -> ").unwrap();
-				m.insert((k.chars().nth(0).unwrap(), k.chars().nth(1).unwrap()), v.chars().nth(0).unwrap());
-				m
-			})
+		template: input.split("\n\n").take(1).next().unwrap().chars().collect::<Vec<_>>(),
+		insertion_rules: input.split("\n\n").last().unwrap().lines().fold(HashMap::new(), |mut m, r| {
+			let (k, v) = r.split_once(" -> ").unwrap();
+			m.insert(
+				(k.chars().nth(0).unwrap(), k.chars().nth(1).unwrap()),
+				v.chars().nth(0).unwrap(),
+			);
+			m
+		}),
 	};
 	for _ in 0..40 {
 		formula.step();

@@ -18,7 +18,7 @@ fn apply_floating_bitmask(num: u64, bitmask: &[u8]) -> Vec<u64> {
 			let mut r = values.iter().map(|v| clear_bit(*v, i as u64)).collect::<Vec<_>>();
 			r.extend(values.iter().map(|v| set_bit(*v, i as u64)));
 			r
-		}
+		},
 	})
 }
 

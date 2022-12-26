@@ -84,7 +84,7 @@ pub fn part_01(input: &String) -> u64 {
 						} else {
 							return c.incorrect_points();
 						}
-					}
+					},
 					Enclosing::Opening(c) => s.push(c),
 				}
 			}
@@ -108,7 +108,7 @@ pub fn part_02(input: &String) -> u64 {
 						} else {
 							return None;
 						}
-					}
+					},
 					Enclosing::Opening(c) => s.push(c),
 				}
 			}

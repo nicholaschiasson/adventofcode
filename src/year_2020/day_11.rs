@@ -59,14 +59,14 @@ fn count_adjacent_occupancies(grid: &Vec<Vec<Space>>, position: Position, scan: 
 				match grid[y_pos as usize][x_pos as usize] {
 					Space::EmptySeat => {
 						break;
-					}
+					},
 					Space::Floor => {
 						continue;
-					}
+					},
 					Space::OccupiedSeat => {
 						count += 1;
 						break;
-					}
+					},
 				}
 			}
 		}
@@ -90,14 +90,14 @@ fn compute_seating(grid: &Vec<Vec<Space>>, discomfort_threshold: u64, scan: bool
 						} else {
 							Space::EmptySeat
 						}
-					}
+					},
 					Space::OccupiedSeat => {
 						if count_adjacent_occupancies(grid, Position(i as isize, j as isize), scan) < discomfort_threshold {
 							Space::OccupiedSeat
 						} else {
 							Space::EmptySeat
 						}
-					}
+					},
 				})
 				.collect::<Vec<_>>()
 		})

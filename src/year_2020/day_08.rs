@@ -59,13 +59,13 @@ impl Boot {
 				Instruction::Accumulate(v) => {
 					self.accumulator += v;
 					self.current_instruction += 1;
-				}
+				},
 				Instruction::Jump(v) => {
 					self.current_instruction += v;
-				}
+				},
 				Instruction::NoOperation(_) => {
 					self.current_instruction += 1;
-				}
+				},
 			}
 			Ok(None)
 		}
@@ -76,11 +76,11 @@ impl Boot {
 			match self.try_step() {
 				Ok(Some(v)) => {
 					return Ok(Some(v));
-				}
+				},
 				Err(e) => {
 					return Err(e);
-				}
-				_ => {}
+				},
+				_ => {},
 			}
 		}
 	}
@@ -125,7 +125,7 @@ pub fn part_02(input: &String) -> i64 {
 				Ok(Some(v)) => {
 					a = Some(v);
 					true
-				}
+				},
 				_ => false,
 			}
 		});

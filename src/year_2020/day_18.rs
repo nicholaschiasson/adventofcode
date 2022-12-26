@@ -27,7 +27,7 @@ impl Evaluate for Expression {
 				Operator::Addition => {
 					let last = values.pop().unwrap();
 					values.push(last + self.operands[i + 1].advanced_evaluate());
-				}
+				},
 				Operator::Multiplication => values.push(self.operands[i + 1].advanced_evaluate()),
 			}
 		}
