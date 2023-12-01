@@ -30,7 +30,7 @@ fn dfs_count_paths(graph: &HashMap<&str, Vec<&str>>, start: &str, end: &str, ext
 	visits.insert(start, 1);
 	let mut paths = 0;
 	while let Some((c, n)) = trail.last_mut() {
-		let cave = c.clone();
+		let cave = *c;
 		if *c == end {
 			paths += 1;
 		}
