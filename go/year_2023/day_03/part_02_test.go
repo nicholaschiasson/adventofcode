@@ -1,4 +1,4 @@
-package day02
+package day03
 
 import (
 	"fmt"
@@ -13,7 +13,7 @@ func TestPart02(t *testing.T) {
 	pkgPath := reflect.TypeOf(void{}).PkgPath()
 	root, pkg := GetModuleRootAndRelativePackagePath(pkgPath)
 	RunTestCases(t, Part02, []TestCase{
-		{Name: pkg, Input: ReadFileOrDie(fmt.Sprintf("%v/../rsrc/inputs/%v/tests/practice_01.txt", root, pkg)), Want: 2286},
-		{Name: pkg, Input: ReadFileOrDie(fmt.Sprintf("%v/../rsrc/inputs/%v/tests/final.txt", root, pkg)), Want: 59795},
+		{Name: pkg, Input: ReadFileOrDie(fmt.Sprintf("%v/../rsrc/inputs/%v/tests/practice_01.txt", root, pkg)), Want: 467835},
+		{Name: pkg, Input: ReadFileOrDie(fmt.Sprintf("%v/../rsrc/inputs/%v/tests/final.txt", root, pkg)), Want: 75847567},
 	})
 }
