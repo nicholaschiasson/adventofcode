@@ -13,7 +13,7 @@ func TestPart01(t *testing.T) {
 	pkgPath := reflect.TypeOf(void{}).PkgPath()
 	root, pkg := GetModuleRootAndRelativePackagePath(pkgPath)
 	RunTestCases(t, Part01, []TestCase{
-		{pkg, ReadFileOrDie(fmt.Sprintf("%v/rsrc/inputs/%v/tests/practice_01.txt", root, pkg)), 8},
-		{pkg, ReadFileOrDie(fmt.Sprintf("%v/rsrc/inputs/%v/tests/final.txt", root, pkg)), 2617},
+		{pkg, ReadFileOrDie(fmt.Sprintf("%v/../rsrc/inputs/%v/tests/practice_01.txt", root, pkg)), 8},
+		{pkg, ReadFileOrDie(fmt.Sprintf("%v/../rsrc/inputs/%v/tests/final.txt", root, pkg)), 2617},
 	})
 }
