@@ -14,6 +14,7 @@
           pkgs.delve
           pkgs.go
           pkgs.gopls
+          pkgs.just
           pkgs.iconv
           pkgs.lldb
           pkgs.nerdfonts
