@@ -118,11 +118,10 @@ impl Hand {
 	fn with_rules(self, rules: Rules) -> Self {
 		let mut cards = self.cards;
 		for c in cards.as_mut() {
-			if let Card::Jack | Card::Joker = c {
-				*c = match rules {
-					Rules::Normal => Card::Jack,
-					Rules::Joker => Card::Joker,
-				}
+			match (*c, rules) {
+				(Card::Jack | Card::Joker, Rules::Normal) => *c = Card::Jack,
+				(Card::Jack | Card::Joker, Rules::Joker) => *c = Card::Joker,
+				_ => (),
 			}
 		}
 		Self { cards }
