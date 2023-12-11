@@ -18,12 +18,6 @@ enum Card {
 	Ace,
 }
 
-impl Default for Card {
-	fn default() -> Self {
-		panic!("ain't no default card fool!")
-	}
-}
-
 impl Display for Card {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
 		use Card::*;
@@ -109,7 +103,7 @@ enum Rules {
 	Joker,
 }
 
-#[derive(Clone, Copy, Debug, Default, Eq, Hash, PartialEq, PartialOrd, Ord)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, PartialOrd, Ord)]
 struct Hand {
 	cards: [Card; 5],
 }
