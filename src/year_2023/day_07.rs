@@ -2,7 +2,8 @@ use std::{collections::HashMap, fmt::Display, str::FromStr};
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, PartialOrd, Ord)]
 enum Card {
-	Two = 1,
+	Joker,
+	Two,
 	Three,
 	Four,
 	Five,
@@ -30,6 +31,7 @@ impl Display for Card {
 			f,
 			"{}",
 			match self {
+				Joker => 'J',
 				Two => '2',
 				Three => '3',
 				Four => '4',
@@ -107,26 +109,23 @@ enum Rules {
 	Joker,
 }
 
-#[derive(Clone, Copy, Debug, Default, Eq, Hash, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, Eq, Hash, PartialEq, PartialOrd, Ord)]
 struct Hand {
 	cards: [Card; 5],
-	rules: Rules,
 }
 
 impl Hand {
 	fn with_rules(self, rules: Rules) -> Self {
-		Self { rules, ..self }
-	}
-
-	fn value(&self) -> u64 {
-		let len = self.cards.len();
-		self.cards.iter().enumerate().fold(0, |v, (i, &c)| {
-			v | (if let (Rules::Joker, Card::Jack) = (self.rules, c) {
-				0
-			} else {
-				c as u64
-			} << ((len - i) * 8))
-		}) | ((self.kind() as u64) << (6 * 8))
+		let mut cards = self.cards;
+		for c in cards.as_mut() {
+			if let Card::Jack | Card::Joker = c {
+				*c = match rules {
+					Rules::Normal => Card::Jack,
+					Rules::Joker => Card::Joker,
+				}
+			}
+		}
+		Self { cards }
 	}
 
 	fn kind(&self) -> Kind {
@@ -136,7 +135,7 @@ impl Hand {
 			.cards
 			.iter()
 			.fold(HashMap::new(), |mut m, c| {
-				if let (Rules::Joker, Card::Jack) = (self.rules, c) {
+				if let Card::Joker = c {
 					jokers += 1;
 				} else {
 					m.entry(c).and_modify(|e| *e += 1).or_insert(1);
@@ -181,20 +180,7 @@ impl FromStr for Hand {
 				s.chars().nth(3).map(|c| c.into()).ok_or("parse error")?,
 				s.chars().nth(4).map(|c| c.into()).ok_or("parse error")?,
 			],
-			rules: Default::default(),
 		})
-	}
-}
-
-impl PartialOrd for Hand {
-	fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-		self.value().partial_cmp(&other.value())
-	}
-}
-
-impl Ord for Hand {
-	fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-		self.value().cmp(&other.value())
 	}
 }
 
@@ -204,12 +190,13 @@ pub fn part_01(input: &str) -> u64 {
 		.map(|l| l.split_once(' '))
 		.flatten()
 		.map(|(hand, bid)| (hand.parse::<Hand>().unwrap(), bid.parse::<u64>().unwrap()))
+		.map(|(hand, bid)| (hand.kind(), hand, bid))
 		.collect::<Vec<_>>();
-	hands.sort_by_key(|(hand, _)| hand.value());
+	hands.sort_by_key(|&(kind, hand, _)| (kind, hand));
 	hands
 		.iter()
 		.enumerate()
-		.fold(0, |sum, (i, &(_, bid))| sum + bid * (i as u64 + 1))
+		.fold(0, |sum, (i, &(_, _, bid))| sum + bid * (i as u64 + 1))
 }
 
 pub fn part_02(input: &str) -> u64 {
@@ -223,12 +210,13 @@ pub fn part_02(input: &str) -> u64 {
 				bid.parse::<u64>().unwrap(),
 			)
 		})
+		.map(|(hand, bid)| (hand.kind(), hand, bid))
 		.collect::<Vec<_>>();
-	hands.sort_by_key(|(hand, _)| hand.value());
+	hands.sort_by_key(|&(kind, hand, _)| (kind, hand));
 	hands
 		.iter()
 		.enumerate()
-		.fold(0, |sum, (i, &(_, bid))| sum + bid * (i as u64 + 1))
+		.fold(0, |sum, (i, &(_, _, bid))| sum + bid * (i as u64 + 1))
 }
 
 #[cfg(test)]
