@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::{fmt::Display, str::FromStr};
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
@@ -74,20 +75,87 @@ struct Grid {
 
 impl Grid {
 	fn tilt(&mut self, dir: Direction) {
-		let mut blocked: Vec<isize> = vec![-1; self.width()];
-		for y in 0..self.spaces.len() {
-			for x in 0..self.spaces[y].len() {
-				match self.spaces[y][x] {
-					Space::Round if y as isize > blocked[x] => {
-						self.spaces[y][x] = Space::Empty;
-						self.spaces[(blocked[x] + 1) as usize][x] = Space::Round;
-						blocked[x] += 1;
-					},
-					Space::Cube => blocked[x] = y as isize,
-					_ => (),
+		match dir {
+			Direction::North => {
+				for x in 0..self.width() {
+					let mut rock: Option<usize> = None;
+					for y in 0..self.height() {
+						match self.spaces[y][x] {
+							Space::Cube => rock = Some(y),
+							Space::Round => {
+								if let Some(r) = rock.map(|r| r + 1).or(Some(0)) {
+									self.spaces[y][x] = Space::Empty;
+									self.spaces[r][x] = Space::Round;
+									rock = Some(r);
+								};
+							},
+							_ => (),
+						}
+					}
 				}
-			}
+			},
+			Direction::West => {
+				for y in 0..self.height() {
+					let mut rock: Option<usize> = None;
+					for x in 0..self.width() {
+						match self.spaces[y][x] {
+							Space::Cube => rock = Some(x),
+							Space::Round => {
+								if let Some(r) = rock.map(|r| r + 1).or(Some(0)) {
+									self.spaces[y][x] = Space::Empty;
+									self.spaces[y][r] = Space::Round;
+									rock = Some(r);
+								};
+							},
+							_ => (),
+						}
+					}
+				}
+			},
+			Direction::South => {
+				for x in 0..self.width() {
+					let mut rock: Option<usize> = None;
+					for y in (0..self.height()).rev() {
+						match self.spaces[y][x] {
+							Space::Cube => rock = Some(y),
+							Space::Round => {
+								if let Some(r) = rock.map(|r| r - 1).or(Some(self.height() - 1)) {
+									self.spaces[y][x] = Space::Empty;
+									self.spaces[r][x] = Space::Round;
+									rock = Some(r);
+								};
+							},
+							_ => (),
+						}
+					}
+				}
+			},
+			Direction::East => {
+				for y in 0..self.height() {
+					let mut rock: Option<usize> = None;
+					for x in (0..self.width()).rev() {
+						match self.spaces[y][x] {
+							Space::Cube => rock = Some(x),
+							Space::Round => {
+								if let Some(r) = rock.map(|r| r - 1).or(Some(self.width() - 1)) {
+									self.spaces[y][x] = Space::Empty;
+									self.spaces[y][r] = Space::Round;
+									rock = Some(r);
+								};
+							},
+							_ => (),
+						}
+					}
+				}
+			},
 		}
+	}
+
+	fn spin_cycle(&mut self) {
+		self.tilt(Direction::North);
+		self.tilt(Direction::West);
+		self.tilt(Direction::South);
+		self.tilt(Direction::East);
 	}
 
 	fn height(&self) -> usize {
@@ -123,9 +191,7 @@ impl FromStr for Grid {
 
 pub fn part_01(input: &str) -> u64 {
 	let mut grid: Grid = input.parse().unwrap();
-	println!("{grid}\n");
 	grid.tilt(Direction::North);
-	println!("{grid}");
 	let grid_height = grid.height();
 	grid.spaces.iter().enumerate().fold(0, |load, (i, row)| {
 		load + ((grid_height - i) * row.iter().filter(|&&space| space == Space::Round).count()) as u64
@@ -134,15 +200,20 @@ pub fn part_01(input: &str) -> u64 {
 
 pub fn part_02(input: &str) -> u64 {
 	let mut grid: Grid = input.parse().unwrap();
-	println!("{grid}");
-	grid.tilt(Direction::North);
-	println!("{grid}");
-	grid.tilt(Direction::West);
-	println!("{grid}");
-	grid.tilt(Direction::South);
-	println!("{grid}");
-	grid.tilt(Direction::East);
-	println!("{grid}");
+	let mut grid_set: HashMap<Grid, usize> = HashMap::new();
+	let mut cycle_start: usize = 0;
+	for i in 0.. {
+		if let Some(&j) = grid_set.get(&grid) {
+			cycle_start = j;
+			break;
+		} else {
+			grid_set.insert(grid.clone(), i);
+		}
+		grid.spin_cycle();
+	}
+	let its = (1000000000 - cycle_start) % (grid_set.len() - cycle_start as usize) + cycle_start;
+
+	let grid = grid_set.iter().find(|&(_, &i)| i == its).map(|(g, _)| g).unwrap();
 	let grid_height = grid.height();
 	grid.spaces.iter().enumerate().fold(0, |load, (i, row)| {
 		load + ((grid_height - i) * row.iter().filter(|&&space| space == Space::Round).count()) as u64
@@ -175,7 +246,7 @@ mod tests {
 		);
 		assert_eq!(
 			super::part_02(&read_resource(relative_input_path(&format!("{INPUT_PATH}::final")))),
-			1
+			90551
 		);
 	}
 }
