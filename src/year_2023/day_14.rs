@@ -1,16 +1,11 @@
 use std::collections::HashMap;
+use std::ops::Range;
 use std::{fmt::Display, str::FromStr};
 
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 struct Position {
 	x: u64,
 	y: u64,
-}
-
-impl Position {
-	fn distance(&self, other: &Self) -> u64 {
-		self.x.abs_diff(other.x) + self.y.abs_diff(other.y)
-	}
 }
 
 impl Display for Position {
@@ -74,81 +69,70 @@ struct Grid {
 }
 
 impl Grid {
-	fn tilt(&mut self, dir: Direction) {
+	fn get_outer_range(&self, dir: Direction) -> Range<usize> {
 		match dir {
-			Direction::North => {
-				for x in 0..self.width() {
-					let mut rock: Option<usize> = None;
-					for y in 0..self.height() {
-						match self.spaces[y][x] {
-							Space::Cube => rock = Some(y),
-							Space::Round => {
-								if let Some(r) = rock.map(|r| r + 1).or(Some(0)) {
-									self.spaces[y][x] = Space::Empty;
-									self.spaces[r][x] = Space::Round;
-									rock = Some(r);
-								};
-							},
-							_ => (),
-						}
-					}
-				}
-			},
-			Direction::West => {
-				for y in 0..self.height() {
-					let mut rock: Option<usize> = None;
-					for x in 0..self.width() {
-						match self.spaces[y][x] {
-							Space::Cube => rock = Some(x),
-							Space::Round => {
-								if let Some(r) = rock.map(|r| r + 1).or(Some(0)) {
-									self.spaces[y][x] = Space::Empty;
-									self.spaces[y][r] = Space::Round;
-									rock = Some(r);
-								};
-							},
-							_ => (),
-						}
-					}
-				}
-			},
-			Direction::South => {
-				for x in 0..self.width() {
-					let mut rock: Option<usize> = None;
-					for y in (0..self.height()).rev() {
-						match self.spaces[y][x] {
-							Space::Cube => rock = Some(y),
-							Space::Round => {
-								if let Some(r) = rock.map(|r| r - 1).or(Some(self.height() - 1)) {
-									self.spaces[y][x] = Space::Empty;
-									self.spaces[r][x] = Space::Round;
-									rock = Some(r);
-								};
-							},
-							_ => (),
-						}
-					}
-				}
-			},
-			Direction::East => {
-				for y in 0..self.height() {
-					let mut rock: Option<usize> = None;
-					for x in (0..self.width()).rev() {
-						match self.spaces[y][x] {
-							Space::Cube => rock = Some(x),
-							Space::Round => {
-								if let Some(r) = rock.map(|r| r - 1).or(Some(self.width() - 1)) {
-									self.spaces[y][x] = Space::Empty;
-									self.spaces[y][r] = Space::Round;
-									rock = Some(r);
-								};
-							},
-							_ => (),
-						}
-					}
-				}
-			},
+			Direction::North | Direction::South => 0..self.width(),
+			Direction::West | Direction::East => 0..self.height(),
 		}
+	}
+
+	fn get_inner_range(&self, dir: Direction) -> Vec<usize> {
+		match dir {
+			Direction::North => (0..self.height()).collect(),
+			Direction::West => (0..self.width()).collect(),
+			Direction::South => (0..self.height()).rev().collect(),
+			Direction::East => (0..self.width()).rev().collect(),
+		}
+	}
+
+	fn get_position(&self, dir: Direction, i: usize, j: usize) -> (usize, usize) {
+		match dir {
+			Direction::North | Direction::South => (i, j),
+			Direction::West | Direction::East => (j, i),
+		}
+	}
+
+	fn incr_rock_position(&self, dir: Direction, rock_position: usize) -> usize {
+		match dir {
+			Direction::North | Direction::West => rock_position + 1,
+			Direction::South | Direction::East => rock_position - 1,
+		}
+	}
+
+	fn get_rock_position(&self, dir: Direction, x: usize, y: usize, r: usize) -> (usize, usize) {
+		match dir {
+			Direction::North | Direction::South => (x, r),
+			Direction::West | Direction::East => (r, y),
+		}
+	}
+
+	fn tilt(&mut self, dir: Direction) {
+		let mut first_index = None;
+		for i in self.get_outer_range(dir) {
+			let mut rock: Option<usize> = None;
+			for j in self.get_inner_range(dir) {
+				let (x, y) = self.get_position(dir, i, j);
+				match (self.spaces[y][x], first_index.get_or_insert(j)) {
+					(Space::Cube, _) => rock = Some(j),
+					(Space::Round, rock_init) => {
+						if let Some(r) = rock.map(|r| self.incr_rock_position(dir, r)).or(Some(*rock_init)) {
+							let (r_x, r_y) = self.get_rock_position(dir, x, y, r);
+							self.spaces[y][x] = Space::Empty;
+							self.spaces[r_y][r_x] = Space::Round;
+							rock = Some(r);
+						};
+					},
+					_ => (),
+				}
+			}
+		}
+	}
+
+	fn load(&self) -> u64 {
+		let height = self.height();
+		self.spaces.iter().enumerate().fold(0, |load, (i, row)| {
+			load + ((height - i) * row.iter().filter(|&&space| space == Space::Round).count()) as u64
+		})
 	}
 
 	fn spin_cycle(&mut self) {
@@ -192,10 +176,7 @@ impl FromStr for Grid {
 pub fn part_01(input: &str) -> u64 {
 	let mut grid: Grid = input.parse().unwrap();
 	grid.tilt(Direction::North);
-	let grid_height = grid.height();
-	grid.spaces.iter().enumerate().fold(0, |load, (i, row)| {
-		load + ((grid_height - i) * row.iter().filter(|&&space| space == Space::Round).count()) as u64
-	})
+	grid.load()
 }
 
 pub fn part_02(input: &str) -> u64 {
@@ -213,11 +194,7 @@ pub fn part_02(input: &str) -> u64 {
 	}
 	let its = (1000000000 - cycle_start) % (grid_set.len() - cycle_start as usize) + cycle_start;
 
-	let grid = grid_set.iter().find(|&(_, &i)| i == its).map(|(g, _)| g).unwrap();
-	let grid_height = grid.height();
-	grid.spaces.iter().enumerate().fold(0, |load, (i, row)| {
-		load + ((grid_height - i) * row.iter().filter(|&&space| space == Space::Round).count()) as u64
-	})
+	grid_set.iter().find(|&(_, &i)| i == its).map(|(g, _)| g).unwrap().load()
 }
 
 #[cfg(test)]
