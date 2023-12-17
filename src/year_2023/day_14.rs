@@ -192,7 +192,7 @@ pub fn part_02(input: &str) -> u64 {
 		}
 		grid.spin_cycle();
 	}
-	let its = (1000000000 - cycle_start) % (grid_set.len() - cycle_start as usize) + cycle_start;
+	let its = (1000000000 - cycle_start) % (grid_set.len() - cycle_start) + cycle_start;
 
 	grid_set.iter().find(|&(_, &i)| i == its).map(|(g, _)| g).unwrap().load()
 }

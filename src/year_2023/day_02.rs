@@ -12,7 +12,7 @@ pub fn part_01(input: &str) -> u64 {
 				.all(|set| {
 					set.split(", ").all(|cubes| {
 						cubes
-							.split_once(" ")
+							.split_once(' ')
 							.map(|(count, color)| match (count.parse::<i32>(), bag.get(color)) {
 								(Ok(in_set), Some(&in_bag)) => in_set <= in_bag,
 								_ => false,

@@ -32,7 +32,7 @@ pub fn part_02(input: &str) -> u64 {
 					} else if ss.starts_with("nine") {
 						Some(9)
 					} else {
-						ss.chars().next().map(|c| c.to_digit(10)).flatten()
+						ss.chars().next().and_then(|c| c.to_digit(10))
 					}
 					.map(|n| n as u64)
 				})

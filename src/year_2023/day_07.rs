@@ -67,7 +67,7 @@ impl From<char> for Card {
 }
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, PartialOrd, Ord)]
-enum Kind {
+enum HandType {
 	HighCard,
 	OnePair,
 	TwoPair,
@@ -77,9 +77,9 @@ enum Kind {
 	FiveOfAKind,
 }
 
-impl Display for Kind {
+impl Display for HandType {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		use Kind::*;
+		use HandType::*;
 		write!(
 			f,
 			"{}",
@@ -121,8 +121,8 @@ impl Hand {
 		Self { cards }
 	}
 
-	fn kind(&self) -> Kind {
-		use Kind::*;
+	fn kind(&self) -> HandType {
+		use HandType::*;
 		let mut jokers = 0;
 		let mut cards = self
 			.cards
@@ -136,7 +136,7 @@ impl Hand {
 				m
 			})
 			.values()
-			.map(|&v| v)
+			.copied()
 			.collect::<Vec<_>>();
 
 		cards.sort();
@@ -180,8 +180,7 @@ impl FromStr for Hand {
 pub fn part_01(input: &str) -> u64 {
 	let mut hands = input
 		.lines()
-		.map(|l| l.split_once(' '))
-		.flatten()
+		.flat_map(|l| l.split_once(' '))
 		.map(|(hand, bid)| (hand.parse::<Hand>().unwrap(), bid.parse::<u64>().unwrap()))
 		.map(|(hand, bid)| (hand.kind(), hand, bid))
 		.collect::<Vec<_>>();
@@ -195,8 +194,7 @@ pub fn part_01(input: &str) -> u64 {
 pub fn part_02(input: &str) -> u64 {
 	let mut hands = input
 		.lines()
-		.map(|l| l.split_once(' '))
-		.flatten()
+		.flat_map(|l| l.split_once(' '))
 		.map(|(hand, bid)| {
 			(
 				hand.parse::<Hand>().unwrap().with_rules(Rules::Joker),

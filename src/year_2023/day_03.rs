@@ -33,9 +33,9 @@ pub fn part_01(input: &str) -> u64 {
 		.collect::<Vec<_>>();
 	symbols.iter().fold(0, |sum, (i, j)| {
 		sum
-			+ (i - 1..=i + 1).into_iter().fold(0, |sy, y| {
+			+ (i - 1..=i + 1).fold(0, |sy, y| {
 				let mut wide_num = false;
-				sy + (j - 1..=j + 1).into_iter().fold(0, |sx, x| {
+				sy + (j - 1..=j + 1).fold(0, |sx, x| {
 					if let (Some(&n), wn) = (num_map.get(&(y, x)), wide_num) {
 						wide_num = true;
 						sx + (n * (!wn as u64))

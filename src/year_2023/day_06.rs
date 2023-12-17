@@ -1,16 +1,16 @@
 pub fn part_01(input: &str) -> u64 {
 	input
-		.split_once("\n")
+		.split_once('\n')
 		.map(|(times, distances)| {
 			times
-				.split_once(":")
+				.split_once(':')
 				.unwrap()
 				.1
 				.split_whitespace()
 				.map(|t| t.parse::<f64>().expect("parse time"))
 				.zip(
 					distances
-						.split_once(":")
+						.split_once(':')
 						.unwrap()
 						.1
 						.split_whitespace()
@@ -29,7 +29,7 @@ pub fn part_01(input: &str) -> u64 {
 
 pub fn part_02(input: &str) -> u64 {
 	input
-		.split_once("\n")
+		.split_once('\n')
 		.map(|(time, distance)| {
 			(
 				time.chars().filter(|c| !c.is_whitespace()).collect::<String>(),

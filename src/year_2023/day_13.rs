@@ -61,7 +61,7 @@ struct Valley {
 }
 
 impl Valley {
-	fn find_reflection(&mut self, smudge_tolerance: usize) -> Reflection {
+	fn find_reflection(&self, smudge_tolerance: usize) -> Reflection {
 		let mut column_stack: Vec<usize> = Vec::new();
 		let mut row_stack: Vec<usize> = Vec::new();
 		let mut column_reflection = Reflection::Vertical(0);
@@ -80,17 +80,14 @@ impl Valley {
 					column_reflection.set_value(index as u64 + 1);
 					for t in tolerated {
 						column_tolerated.push((i, t));
-						self.flip(i, t);
 					}
 				} else {
 					column_reflection.set_value(0);
-					while let Some((x, y)) = column_tolerated.pop() {
-						self.flip(x, y);
-					}
+					column_tolerated.clear();
 					break;
 				}
 			}
-			if !column_reflection.value().is_none() {
+			if column_reflection.value().is_some() {
 				if column_tolerated.len() + row_tolerated.len() >= smudge_tolerance {
 					break;
 				} else {
@@ -110,17 +107,14 @@ impl Valley {
 					row_reflection.set_value(index as u64 + 1);
 					for t in tolerated {
 						row_tolerated.push((t, i));
-						self.flip(t, i);
 					}
 				} else {
 					row_reflection.set_value(0);
-					while let Some((x, y)) = row_tolerated.pop() {
-						self.flip(x, y);
-					}
+					row_tolerated.clear();
 					break;
 				}
 			}
-			if !row_reflection.value().is_none() {
+			if row_reflection.value().is_some() {
 				if column_tolerated.len() + row_tolerated.len() >= smudge_tolerance {
 					break;
 				} else {
@@ -146,23 +140,6 @@ impl Valley {
 			},
 			(Some(_), _, _, _) => column_reflection,
 			(_, Some(_), _, _) => row_reflection,
-		}
-	}
-
-	fn flip(&mut self, x: usize, y: usize) {
-		if let Some(row) = self.rows.get_mut(y) {
-			match row.chars().nth(x) {
-				Some('.') => row.replace_range(x..=x, "#"),
-				Some('#') => row.replace_range(x..=x, "."),
-				_ => (),
-			}
-		}
-		if let Some(column) = self.columns.get_mut(x) {
-			match column.chars().nth(y) {
-				Some('.') => column.replace_range(y..=y, "#"),
-				Some('#') => column.replace_range(y..=y, "."),
-				_ => (),
-			}
 		}
 	}
 }
@@ -199,9 +176,8 @@ impl FromStr for Valley {
 pub fn part_01(input: &str) -> u64 {
 	input
 		.split("\n\n")
-		.map(|valley| valley.parse::<Valley>())
-		.flatten()
-		.fold(0, |s, mut valley| {
+		.flat_map(|valley| valley.parse::<Valley>())
+		.fold(0, |s, valley| {
 			s + match valley.find_reflection(0) {
 				Reflection::Vertical(r) => r,
 				Reflection::Horizontal(r) => r * 100,
@@ -213,9 +189,8 @@ pub fn part_01(input: &str) -> u64 {
 pub fn part_02(input: &str) -> u64 {
 	input
 		.split("\n\n")
-		.map(|valley| valley.parse::<Valley>())
-		.flatten()
-		.fold(0, |s, mut valley| {
+		.flat_map(|valley| valley.parse::<Valley>())
+		.fold(0, |s, valley| {
 			s + match valley.find_reflection(1) {
 				Reflection::Vertical(r) => r,
 				Reflection::Horizontal(r) => r * 100,

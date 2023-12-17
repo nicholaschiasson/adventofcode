@@ -7,7 +7,7 @@ pub fn part_01(input: &str) -> u64 {
 			l.split_once(": ")
 				.unwrap()
 				.1
-				.split_once("|")
+				.split_once('|')
 				.map(|(winning, have)| {
 					(
 						HashSet::<u64>::from_iter(winning.split_whitespace().map(|n| n.parse::<u64>().unwrap())),
@@ -29,7 +29,7 @@ pub fn part_02(input: &str) -> u64 {
 			l.split_once(": ")
 				.unwrap()
 				.1
-				.split_once("|")
+				.split_once('|')
 				.map(|(winning, have)| {
 					(
 						HashSet::<u64>::from_iter(winning.split_whitespace().map(|n| n.parse::<u64>().unwrap())),

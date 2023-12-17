@@ -234,7 +234,7 @@ impl Grid {
 		if !range_y.contains(&y_a) || !range_y.contains(&y_b) || !range_x.contains(&x_a) || !range_x.contains(&x_b) {
 			return false;
 		}
-		self.0[y_a][x_a].connected().contains(&pos_b) && self.0[y_b][x_b].connected().contains(&pos_a)
+		self.0[y_a][x_a].connected().contains(pos_b) && self.0[y_b][x_b].connected().contains(pos_a)
 	}
 
 	fn isolate_loop(&mut self) -> &mut Self {

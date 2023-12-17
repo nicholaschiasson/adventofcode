@@ -1,16 +1,15 @@
 pub fn part_01(input: &str) -> u64 {
 	let seeds = input
 		.lines()
-		.nth(0)
-		.map(|l| {
-			l.split_once(" ").map(|(_, seeds)| {
+		.next()
+		.and_then(|l| {
+			l.split_once(' ').map(|(_, seeds)| {
 				seeds
 					.split_whitespace()
 					.map(|seed| seed.parse::<u64>().unwrap())
 					.collect::<Vec<_>>()
 			})
 		})
-		.flatten()
 		.unwrap();
 
 	input
@@ -30,16 +29,16 @@ pub fn part_01(input: &str) -> u64 {
 		})
 		.iter()
 		.min()
-		.map(|&n| n)
+		.copied()
 		.unwrap()
 }
 
 pub fn part_02(input: &str) -> u64 {
 	let seeds = input
 		.lines()
-		.nth(0)
-		.map(|l| {
-			l.split_once(" ").map(|(_, seeds)| {
+		.next()
+		.and_then(|l| {
+			l.split_once(' ').map(|(_, seeds)| {
 				seeds
 					.split_whitespace()
 					.collect::<Vec<_>>()
@@ -49,7 +48,6 @@ pub fn part_02(input: &str) -> u64 {
 					.collect::<Vec<_>>()
 			})
 		})
-		.flatten()
 		.unwrap();
 
 	input
@@ -57,7 +55,7 @@ pub fn part_02(input: &str) -> u64 {
 		.skip(1)
 		.fold(seeds, |v, m| {
 			v.iter()
-				.map(|r| {
+				.flat_map(|r| {
 					m.lines()
 						.skip(1)
 						.map(|l| l.split_whitespace().map(|n| n.parse::<u64>().unwrap()).collect::<Vec<_>>())
@@ -76,7 +74,6 @@ pub fn part_02(input: &str) -> u64 {
 						})
 						.unwrap_or(vec![r.start..r.end])
 				})
-				.flatten()
 				.collect::<Vec<_>>()
 		})
 		.iter()
