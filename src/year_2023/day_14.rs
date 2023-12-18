@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::ops::Range;
 use std::{fmt::Display, str::FromStr};
 
-#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 struct Position {
 	x: u64,
 	y: u64,
@@ -23,8 +23,9 @@ impl From<(usize, usize)> for Position {
 	}
 }
 
-#[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 enum Space {
+	#[default]
 	Empty,
 	Round,
 	Cube,
