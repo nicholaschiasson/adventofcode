@@ -1,6 +1,9 @@
 package utils
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 type TestCase struct {
 	Name, Input string
@@ -8,8 +11,8 @@ type TestCase struct {
 }
 
 func RunTestCases(t *testing.T, aocFunc AocFunc, testCases []TestCase) {
-	for _, tt := range testCases {
-		t.Run(tt.Name, func(t *testing.T) {
+	for i, tt := range testCases {
+		t.Run(fmt.Sprintf("%v#%03v", tt.Name, i), func(t *testing.T) {
 			ans := aocFunc(tt.Input)
 			if ans != tt.Want {
 				t.Errorf("got %d, want %d", ans, tt.Want)

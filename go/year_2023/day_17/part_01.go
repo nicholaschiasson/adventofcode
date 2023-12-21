@@ -17,10 +17,10 @@ type Graph struct {
 type Direction = int
 
 const (
-	UP Direction = iota
-	LEFT
-	RIGHT
-	DOWN
+	Up Direction = iota
+	Left
+	Right
+	Down
 )
 
 type Move struct {
@@ -36,11 +36,11 @@ func leastHeatLoss(graph *Graph, sx, sy, dx, dy, minSteps, maxSteps int) int {
 		node:      graph.nodes[sy][sx],
 	}
 	next := []Move{{
-		direction: DOWN,
+		direction: Down,
 		step:      0,
 		node:      graph.nodes[sy][sx],
 	}, {
-		direction: RIGHT,
+		direction: Right,
 		step:      0,
 		node:      graph.nodes[sy][sx],
 	}}
@@ -90,12 +90,12 @@ func Part01(input string) int {
 				neighbours: [4]*Node{},
 			})
 			if i > 0 {
-				graph.nodes[i-1][j].neighbours[DOWN] = graph.nodes[i][j]
-				graph.nodes[i][j].neighbours[UP] = graph.nodes[i-1][j]
+				graph.nodes[i-1][j].neighbours[Down] = graph.nodes[i][j]
+				graph.nodes[i][j].neighbours[Up] = graph.nodes[i-1][j]
 			}
 			if j > 0 {
-				graph.nodes[i][j-1].neighbours[RIGHT] = graph.nodes[i][j]
-				graph.nodes[i][j].neighbours[LEFT] = graph.nodes[i][j-1]
+				graph.nodes[i][j-1].neighbours[Right] = graph.nodes[i][j]
+				graph.nodes[i][j].neighbours[Left] = graph.nodes[i][j-1]
 			}
 		}
 	}
