@@ -24,10 +24,6 @@ type Instruction struct {
 	magnitude int
 }
 
-func DirectionFromString(s string) {
-
-}
-
 func (self InstructionString) Parse() Instruction {
 	instruction := strings.Split(string(self), " ")
 	magnitude, _ := strconv.Atoi(instruction[1])
