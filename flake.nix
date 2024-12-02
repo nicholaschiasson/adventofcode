@@ -1,31 +1,58 @@
 {
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    legacy.url = "path:./legacy";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, legacy }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      legacyShell = legacy.devShells.${system};
-    in {
-      devShells.default = pkgs.mkShell {
-        buildInputs = [
-          pkgs.delve
-          pkgs.go
-          pkgs.gopls
-          pkgs.just
-          pkgs.iconv
-          pkgs.lldb
-          pkgs.nerdfonts
-          pkgs.rustup
-          pkgs.starship
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      rust-overlay,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        overlays = [ (import rust-overlay) ];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
+        rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+          rustToolchain
         ];
-        shellHook = ''
-          rustup component add clippy rust-analyzer
-          eval "$(starship init bash)"
-        '';
-      };
-      devShells.legacy = legacyShell.default;
-    });
+        buildInputs = with pkgs; [
+          cargo-watch
+          delve
+          go
+          gopls
+          just
+          iconv
+          lldb
+          nil
+          nixfmt-rfc-style
+          rust-analyzer
+          starship
+        ];
+      in
+      with pkgs;
+      {
+        devShells.default = mkShell {
+          inherit buildInputs nativeBuildInputs;
+          shellHook = ''
+            source .env
+            rustc --version
+            eval "$(starship init bash)"
+          '';
+        };
+      }
+    );
 }
