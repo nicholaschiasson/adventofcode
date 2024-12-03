@@ -35,8 +35,8 @@ trait Point: Clone + Copy + Eq + Hash + Sized {
     fn y(&self) -> i64;
     fn z(&self) -> i64;
     fn w(&self) -> Option<i64>;
-    fn set_x(&mut self, x: i64);
-    fn set_y(&mut self, y: i64);
+    fn _set_x(&mut self, x: i64);
+    fn _set_y(&mut self, y: i64);
     fn set_z(&mut self, z: i64);
     fn set_w(&mut self, w: i64);
 }
@@ -57,10 +57,10 @@ impl Point for Point3 {
     fn w(&self) -> Option<i64> {
         None
     }
-    fn set_x(&mut self, x: i64) {
+    fn _set_x(&mut self, x: i64) {
         self.0 = x;
     }
-    fn set_y(&mut self, y: i64) {
+    fn _set_y(&mut self, y: i64) {
         self.1 = y;
     }
     fn set_z(&mut self, z: i64) {
@@ -85,10 +85,10 @@ impl Point for Point4 {
     fn w(&self) -> Option<i64> {
         Some(self.3)
     }
-    fn set_x(&mut self, x: i64) {
+    fn _set_x(&mut self, x: i64) {
         self.0 = x;
     }
-    fn set_y(&mut self, y: i64) {
+    fn _set_y(&mut self, y: i64) {
         self.1 = y;
     }
     fn set_z(&mut self, z: i64) {

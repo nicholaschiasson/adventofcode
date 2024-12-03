@@ -109,6 +109,7 @@ fn compute_seating(
         .collect::<Vec<_>>()
 }
 
+#[allow(dead_code)]
 trait Clamp: PartialOrd {
     fn clamp(self, a: Self, b: Self) -> Self;
 }
