@@ -55,8 +55,7 @@ fn dfs_count_paths(graph: &HashMap<&str, Vec<&str>>, start: &str, end: &str, ext
 					.get(next)
 					.unwrap()
 					.iter()
-					.filter(|&c| *c != start && (&(*c.to_uppercase()) == *c || *visits.get_mut(*c).unwrap() < 1 || extras > 0))
-					.map(|&c| c)
+					.filter(|&c| *c != start && (&(*c.to_uppercase()) == *c || *visits.get_mut(*c).unwrap() < 1 || extras > 0)).copied()
 					.collect(),
 			));
 		}

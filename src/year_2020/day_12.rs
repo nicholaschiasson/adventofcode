@@ -40,7 +40,7 @@ impl Vector {
 					},
 				4,
 			))
-			.expect(&format!("Failed to rotate {:?}", rotation)),
+			.unwrap_or_else(|_| panic!("Failed to rotate {:?}", rotation)),
 			p,
 		)
 	}

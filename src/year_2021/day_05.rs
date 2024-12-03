@@ -23,7 +23,7 @@ struct Line(Point, Point);
 
 impl Line {
 	fn is_horizontal_or_vertical(&self) -> bool {
-		return self.0 .0 == self.1 .0 || self.0 .1 == self.1 .1;
+		self.0 .0 == self.1 .0 || self.0 .1 == self.1 .1
 	}
 
 	fn range(&self) -> Vec<Point> {

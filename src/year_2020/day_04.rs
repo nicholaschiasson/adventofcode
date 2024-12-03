@@ -29,7 +29,7 @@ impl Passport {
 	fn has_valid_byr(&self) -> bool {
 		if let Some(byr) = &self.byr {
 			return match byr.parse::<u32>() {
-				Ok(v) => v >= 1920 && v <= 2002,
+				Ok(v) => (1920..=2002).contains(&v),
 				_ => false,
 			};
 		}
@@ -39,7 +39,7 @@ impl Passport {
 	fn has_valid_iyr(&self) -> bool {
 		if let Some(iyr) = &self.iyr {
 			return match iyr.parse::<u32>() {
-				Ok(v) => v >= 2010 && v <= 2020,
+				Ok(v) => (2010..=2020).contains(&v),
 				_ => false,
 			};
 		}
@@ -49,7 +49,7 @@ impl Passport {
 	fn has_valid_eyr(&self) -> bool {
 		if let Some(eyr) = &self.eyr {
 			return match eyr.parse::<u32>() {
-				Ok(v) => v >= 2020 && v <= 2030,
+				Ok(v) => (2020..=2030).contains(&v),
 				_ => false,
 			};
 		}
@@ -63,11 +63,11 @@ impl Passport {
 				Some(c) => match c.get(2).map(|m| m.as_str()) {
 					Some("cm") => {
 						let h = c.get(1).map_or(0, |m| m.as_str().parse::<u32>().unwrap());
-						h >= 150 && h <= 193
+						(150..=193).contains(&h)
 					},
 					Some("in") => {
 						let h = c.get(1).map_or(0, |m| m.as_str().parse::<u32>().unwrap());
-						h >= 59 && h <= 76
+						(59..=76).contains(&h)
 					},
 					_ => false,
 				},

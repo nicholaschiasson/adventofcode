@@ -25,7 +25,7 @@ fn parse_rules(rules: &String) -> Rules {
 				m.insert(r_split[0].to_string(), vec![range[0]..=range[1]]);
 			}
 		});
-		return m;
+		m
 	})
 }
 
@@ -65,7 +65,7 @@ pub fn part_02(input: &String) -> u64 {
 				.iter()
 				.all(|f| rules.values().any(|r| r.iter().any(|range| range.contains(f))))
 		})
-		.chain(vec![my_ticket].iter())
+		.chain([my_ticket].iter())
 		.for_each(|ticket| {
 			ticket.iter().enumerate().for_each(|(i, f)| {
 				for (name, rule) in &rules {
@@ -93,7 +93,7 @@ pub fn part_02(input: &String) -> u64 {
 	field_indices
 		.iter()
 		.filter(|(k, _)| k.starts_with("departure "))
-		.fold(1, |p, (_, i)| p as u64 * my_ticket_copy[*i])
+		.fold(1, |p, (_, i)| p * my_ticket_copy[*i])
 }
 
 #[cfg(test)]

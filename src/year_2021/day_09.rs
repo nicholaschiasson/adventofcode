@@ -79,7 +79,7 @@ pub fn part_02(input: &String) -> u64 {
 		})
 		.collect::<Vec<_>>();
 	basins.sort_by(|a, b| b.cmp(a));
-	basins.iter().take(3).fold(1, |p, b| p * b) as u64
+	basins.iter().take(3).product::<i32>() as u64
 }
 
 #[cfg(test)]

@@ -33,7 +33,7 @@ fn parse_rules(rules: &String) -> HashMap<String, Rule> {
 		.lines()
 		.filter(|l| !l.ends_with(" no other bags."))
 		.map(|l| l.split(" bags contain "))
-		.map(|mut s| {
+		.flat_map(|mut s| {
 			let p = s.next().unwrap();
 			s.next()
 				.unwrap()
@@ -53,7 +53,6 @@ fn parse_rules(rules: &String) -> HashMap<String, Rule> {
 				})
 				.collect::<Vec<(String, u8, String)>>()
 		})
-		.flatten()
 		.collect::<Vec<(String, u8, String)>>();
 
 	let mut m: HashMap<String, Rule> = HashMap::new();

@@ -17,7 +17,7 @@ pub fn part_01(input: &str) -> u64 {
             if sign == 0 {
                 sign = s;
             }
-            if s == 0 || s != sign || d > 3 || d < -3 {
+            if s == 0 || s != sign || !(-3..=3).contains(&d) {
                 not_safe += 1;
                 break;
             }
@@ -59,8 +59,8 @@ fn is_safe(report: &Vec<i64>) -> bool {
             if sign == 0 {
                 sign = s;
             }
-            if s == 0 || s != sign || diff > 3 || diff < -3 {
-                if let None = damper {
+            if s == 0 || s != sign || !(-3..=3).contains(&diff) {
+                if damper.is_none() {
                     damper = Some(level);
                     sign = pre_damper_sign;
                     continue;
@@ -71,7 +71,7 @@ fn is_safe(report: &Vec<i64>) -> bool {
         }
         previous = Some(level);
     }
-    return true;
+    true
 }
 
 #[cfg(test)]

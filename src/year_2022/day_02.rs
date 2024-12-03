@@ -113,7 +113,7 @@ pub fn part_01(input: &String) -> u64 {
 				.map(|h| h.parse().expect("parse hand"))
 				.collect::<Vec<Hand>>()
 		})
-		.map(|h| h.get(1).expect("player choice").play(&h.get(0).expect("opponent choice")))
+		.map(|h| h.get(1).expect("player choice").play(h.first().expect("opponent choice")))
 		.sum()
 }
 

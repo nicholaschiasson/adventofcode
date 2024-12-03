@@ -56,14 +56,12 @@ fn parse_expression(s: &str) -> (Expression, usize) {
 			let (e, end) = parse_expression(&s[begin..]);
 			i = begin + end + 1;
 			Operand::Expression(e)
-		} else {
-			if let Ok((v, idx)) = parse_partial::<i64, _>(&s[i..]) {
-				i += idx;
-				Operand::Value(v)
-			} else {
-				panic!("Failed to parse operand")
-			}
-		});
+		} else if let Ok((v, idx)) = parse_partial::<i64, _>(&s[i..]) {
+  				i += idx;
+  				Operand::Value(v)
+  			} else {
+  				panic!("Failed to parse operand")
+  			});
 		if s[i..].starts_with(')') {
 			break;
 		}

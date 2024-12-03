@@ -1,7 +1,7 @@
 use std::collections::VecDeque;
 
 fn find_outlier(sequence: &Vec<i64>, preamble: usize) -> i64 {
-	let mut prev_five = sequence.iter().take(preamble).map(|n| *n).collect::<VecDeque<_>>();
+	let mut prev_five = sequence.iter().take(preamble).copied().collect::<VecDeque<_>>();
 	*sequence
 		.iter()
 		.skip(preamble)

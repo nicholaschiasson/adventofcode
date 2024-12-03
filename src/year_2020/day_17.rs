@@ -146,7 +146,7 @@ impl<T: Point> Space<T> {
 									n += 1;
 								}
 							}
-							if let None = point.w() {
+							if point.w().is_none() {
 								break;
 							}
 						}
@@ -178,25 +178,21 @@ impl<T: Point> Space<T> {
 								} else {
 									new_grid.insert(p, false);
 								}
-							} else {
-								if active_neighbours == 3 {
-									new_grid.insert(p, true);
-								} else {
-									new_grid.insert(p, false);
-								}
-							}
-						} else {
-							if active_neighbours == 3 {
-								new_grid.insert(p, true);
-							} else {
-								new_grid.insert(p, false);
-							}
-						}
+							} else if active_neighbours == 3 {
+       									new_grid.insert(p, true);
+       								} else {
+       									new_grid.insert(p, false);
+       								}
+						} else if active_neighbours == 3 {
+      								new_grid.insert(p, true);
+      							} else {
+      								new_grid.insert(p, false);
+      							}
 						new_bounds_x.expand(x);
 						new_bounds_y.expand(y);
 						new_bounds_z.expand(z);
 						new_bounds_w.expand(w);
-						if let None = p.w() {
+						if p.w().is_none() {
 							break;
 						}
 					}
@@ -216,9 +212,9 @@ impl<T: Point> Display for Space<T> {
 		for w in self.bounds_w.min()..=self.bounds_w.max() {
 			for z in self.bounds_z.min()..=self.bounds_z.max() {
 				if T::new(0, 0).w().is_none() {
-					write!(f, "z={}\n", z)?;
+					writeln!(f, "z={}", z)?;
 				} else {
-					write!(f, "z={}, w={}\n", z, w)?;
+					writeln!(f, "z={}, w={}", z, w)?;
 				}
 				for y in self.bounds_y.min()..=self.bounds_y.max() {
 					for x in self.bounds_x.min()..=self.bounds_x.max() {
@@ -239,9 +235,9 @@ impl<T: Point> Display for Space<T> {
 							}
 						)?;
 					}
-					write!(f, "\n")?;
+					writeln!(f)?;
 				}
-				write!(f, "\n")?;
+				writeln!(f)?;
 			}
 			if T::new(0, 0).w().is_none() {
 				break;

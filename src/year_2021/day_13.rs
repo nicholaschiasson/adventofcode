@@ -84,9 +84,7 @@ impl FromStr for Paper {
 pub fn part_01(input: &String) -> u64 {
 	let paper = input.split("\n\n").take(1).next().unwrap().parse::<Paper>().unwrap();
 	let folds = input
-		.split("\n\n")
-		.skip(1)
-		.next()
+		.split("\n\n").nth(1)
 		.unwrap()
 		.lines()
 		.map(|l| l.parse::<Axis>().unwrap())
@@ -97,9 +95,7 @@ pub fn part_01(input: &String) -> u64 {
 pub fn part_02(input: &String) -> u64 {
 	let paper = input.split("\n\n").take(1).next().unwrap().parse::<Paper>().unwrap();
 	let folds = input
-		.split("\n\n")
-		.skip(1)
-		.next()
+		.split("\n\n").nth(1)
 		.unwrap()
 		.lines()
 		.map(|l| l.parse::<Axis>().unwrap())

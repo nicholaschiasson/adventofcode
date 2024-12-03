@@ -48,7 +48,7 @@ pub fn part_02(input: &String) -> u64 {
 		oxygen_lines = oxygen_lines
 			.iter()
 			.filter(|&l| {
-				if let None = common_bit {
+				if common_bit.is_none() {
 					if let Some('1') = l.chars().nth(i) {
 						true
 					} else {
@@ -57,8 +57,7 @@ pub fn part_02(input: &String) -> u64 {
 				} else {
 					common_bit == l.chars().nth(i)
 				}
-			})
-			.map(|&l| l)
+			}).copied()
 			.collect::<Vec<_>>();
 		i += 1;
 	}
@@ -78,7 +77,7 @@ pub fn part_02(input: &String) -> u64 {
 		c02_lines = c02_lines
 			.iter()
 			.filter(|&l| {
-				if let None = common_bit {
+				if common_bit.is_none() {
 					if let Some('0') = l.chars().nth(i) {
 						true
 					} else {
@@ -87,8 +86,7 @@ pub fn part_02(input: &String) -> u64 {
 				} else {
 					common_bit != l.chars().nth(i)
 				}
-			})
-			.map(|&l| l)
+			}).copied()
 			.collect::<Vec<_>>();
 		i += 1;
 	}

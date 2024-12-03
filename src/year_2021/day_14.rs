@@ -37,8 +37,8 @@ pub fn part_01(input: &String) -> u64 {
 		insertion_rules: input.split("\n\n").last().unwrap().lines().fold(HashMap::new(), |mut m, r| {
 			let (k, v) = r.split_once(" -> ").unwrap();
 			m.insert(
-				(k.chars().nth(0).unwrap(), k.chars().nth(1).unwrap()),
-				v.chars().nth(0).unwrap(),
+				(k.chars().next().unwrap(), k.chars().nth(1).unwrap()),
+				v.chars().next().unwrap(),
 			);
 			m
 		}),
@@ -56,8 +56,8 @@ pub fn part_02(input: &String) -> u64 {
 		insertion_rules: input.split("\n\n").last().unwrap().lines().fold(HashMap::new(), |mut m, r| {
 			let (k, v) = r.split_once(" -> ").unwrap();
 			m.insert(
-				(k.chars().nth(0).unwrap(), k.chars().nth(1).unwrap()),
-				v.chars().nth(0).unwrap(),
+				(k.chars().next().unwrap(), k.chars().nth(1).unwrap()),
+				v.chars().next().unwrap(),
 			);
 			m
 		}),

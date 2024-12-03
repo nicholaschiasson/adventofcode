@@ -132,7 +132,7 @@ fn print_grid(grid: &Vec<Vec<Space>>) -> String {
 pub fn part_01(input: &String) -> u64 {
 	let mut grid = parse_grid(input);
 	loop {
-		let previous = grid.iter().map(|r| r.clone()).collect::<Vec<_>>();
+		let previous = grid.to_vec();
 		grid = compute_seating(&grid, 4, false);
 		if let Ordering::Equal = previous.iter().flatten().cmp(grid.iter().flatten()) {
 			break;
@@ -147,7 +147,7 @@ pub fn part_01(input: &String) -> u64 {
 pub fn part_02(input: &String) -> u64 {
 	let mut grid = parse_grid(input);
 	loop {
-		let previous = grid.iter().map(|r| r.clone()).collect::<Vec<_>>();
+		let previous = grid.to_vec();
 		grid = compute_seating(&grid, 5, true);
 		if let Ordering::Equal = previous.iter().flatten().cmp(grid.iter().flatten()) {
 			break;

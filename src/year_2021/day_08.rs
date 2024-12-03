@@ -21,9 +21,9 @@ impl Signal<'_> {
 	}
 }
 
-impl Into<u8> for Signal<'_> {
-	fn into(self) -> u8 {
-		let mut s: Vec<u8> = self.0.bytes().collect();
+impl From<Signal<'_>> for u8 {
+	fn from(val: Signal<'_>) -> Self {
+		let mut s: Vec<u8> = val.0.bytes().collect();
 		s.sort();
 		match s.as_slice() {
 			b"abcefg" => 0,
@@ -85,8 +85,7 @@ impl SignalMapping {
 						} else {
 							!signal.contains(&c.to_string())
 						}
-					})
-					.map(|&c| c)
+					}).copied()
 					.collect::<Vec<_>>()
 			})
 			.collect::<Vec<_>>();
@@ -126,7 +125,7 @@ pub fn part_02(input: &String) -> u64 {
 	let mappings: Vec<SignalMapping> = input
 		.lines()
 		.map(|l| {
-			let mut signals = l.split(" | ").nth(0).unwrap().split_whitespace().collect::<Vec<_>>();
+			let mut signals = l.split(" | ").next().unwrap().split_whitespace().collect::<Vec<_>>();
 			signals.sort_by(|&a, &b| a.len().cmp(&b.len()));
 			signals.iter().fold(SignalMapping::new(), |mapping, &s| {
 				Signal(s)

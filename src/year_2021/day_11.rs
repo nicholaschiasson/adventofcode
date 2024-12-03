@@ -26,12 +26,11 @@ impl DumboOctopus {
 
 	fn neighbours(&self) -> Vec<Point> {
 		((self.position.1 - 1)..=(self.position.1 + 1))
-			.map(|y| {
+			.flat_map(|y| {
 				((self.position.0 - 1)..=(self.position.0 + 1))
 					.map(|x| Point(x, y))
 					.collect::<Vec<_>>()
 			})
-			.flatten()
 			.filter(|&p| p != self.position)
 			.collect()
 	}
@@ -96,7 +95,7 @@ pub fn part_02(input: &String) -> u64 {
 		})
 		.collect::<Vec<_>>();
 	let mut steps = 1;
-	while (step(&mut &mut octopuses) as usize) != octopuses.iter().flatten().count() {
+	while (step(&mut octopuses) as usize) != octopuses.iter().flatten().count() {
 		steps += 1;
 	}
 	steps

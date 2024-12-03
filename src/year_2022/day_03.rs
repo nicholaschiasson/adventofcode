@@ -30,7 +30,7 @@ pub fn part_02(input: &String) -> u64 {
 		.windows(3)
 		.step_by(3)
 		.map(|s| {
-			s[0]
+			*s[0]
 				.bytes()
 				.collect::<HashSet<_>>()
 				.intersection(&s[1].bytes().collect::<HashSet<_>>())
@@ -39,7 +39,6 @@ pub fn part_02(input: &String) -> u64 {
 				.intersection(&s[2].bytes().collect::<HashSet<_>>())
 				.next()
 				.expect("badge in rucksack")
-				.clone()
 		})
 		.map(|b| (priorities.iter().position(|&i| i == b).expect("item having priority") + 1) as u64)
 		.sum()
