@@ -3,7 +3,7 @@ use std::collections::{HashMap, VecDeque};
 pub fn part_01(input: &str) -> u64 {
     let word = b"XMAS";
     let grid = input.lines().map(|l| l.as_bytes()).collect::<Vec<_>>();
-    let mut queue: VecDeque<(usize, (isize, isize), (isize, isize))> = VecDeque::new();
+    let mut queue = VecDeque::new();
     let mut occurrences = 0;
 
     for (irow, row) in grid.iter().enumerate() {
