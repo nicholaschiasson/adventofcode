@@ -102,7 +102,7 @@ pub fn part_02(input: &str) -> u64 {
             i += Operator::DoNot.len();
             operator = None;
         }
-        if do_op == true {
+        if do_op {
             match operator {
                 Some(Operator::Mul) => {
                     if let Some(l) = left {
