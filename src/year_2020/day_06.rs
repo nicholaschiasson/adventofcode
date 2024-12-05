@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input.split("\n\n").fold(0, |n, group| {
         n + group
             .lines()
@@ -11,7 +11,7 @@ pub fn part_01(input: &String) -> u64 {
     }) as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     input.split("\n\n").fold(0, |n, group| {
         n + group
             .lines()

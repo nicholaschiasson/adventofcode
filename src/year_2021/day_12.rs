@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn parse_caves(input: &String) -> HashMap<&str, Vec<&str>> {
+fn parse_caves(input: &str) -> HashMap<&str, Vec<&str>> {
     input
         .lines()
         .fold(HashMap::<&str, Vec<&str>>::new(), |mut m, l| {
@@ -76,11 +76,11 @@ fn dfs_count_paths(
     paths
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     dfs_count_paths(&parse_caves(input), "start", "end", 0)
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     dfs_count_paths(&parse_caves(input), "start", "end", 1)
 }
 

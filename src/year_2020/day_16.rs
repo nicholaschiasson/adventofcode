@@ -5,16 +5,16 @@ use std::{
 
 type Rules = HashMap<String, Vec<RangeInclusive<u64>>>;
 
-fn parse_input(input: &String) -> (Rules, Vec<u64>, Vec<Vec<u64>>) {
+fn parse_input(input: &str) -> (Rules, Vec<u64>, Vec<Vec<u64>>) {
     let input_split = input.split("\n\n").collect::<Vec<_>>();
     (
-        parse_rules(&input_split[0].to_string()),
-        parse_tickets(&input_split[1].to_string())[0].clone(),
-        parse_tickets(&input_split[2].to_string()),
+        parse_rules(input_split[0]),
+        parse_tickets(input_split[1])[0].clone(),
+        parse_tickets(input_split[2]),
     )
 }
 
-fn parse_rules(rules: &String) -> Rules {
+fn parse_rules(rules: &str) -> Rules {
     rules
         .lines()
         .fold(HashMap::new(), |mut m: Rules, rule: &str| {
@@ -24,7 +24,7 @@ fn parse_rules(rules: &String) -> Rules {
                     .split('-')
                     .map(|v| v.parse::<u64>().unwrap())
                     .collect::<Vec<_>>();
-                if let Some(ranges) = m.get_mut(&r_split[0].to_string()) {
+                if let Some(ranges) = m.get_mut(r_split[0]) {
                     ranges.push(range[0]..=range[1]);
                 } else {
                     m.insert(r_split[0].to_string(), vec![range[0]..=range[1]]);
@@ -34,7 +34,7 @@ fn parse_rules(rules: &String) -> Rules {
         })
 }
 
-fn parse_tickets(tickets: &String) -> Vec<Vec<u64>> {
+fn parse_tickets(tickets: &str) -> Vec<Vec<u64>> {
     tickets
         .lines()
         .skip(1)
@@ -46,7 +46,7 @@ fn parse_tickets(tickets: &String) -> Vec<Vec<u64>> {
         .collect::<Vec<_>>()
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let (rules, _, tickets) = parse_input(input);
     tickets.iter().fold(0, |error_rate, ticket| {
         ticket.iter().fold(error_rate, |e, f| {
@@ -62,7 +62,7 @@ pub fn part_01(input: &String) -> u64 {
     })
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let (rules, my_ticket, tickets) = parse_input(input);
     let my_ticket_copy = my_ticket.clone();
     let mut fields = my_ticket

@@ -3,7 +3,7 @@ struct Slope {
     right: i32,
 }
 
-fn count_collisions(grid: &String, slope: &Slope) -> u64 {
+fn count_collisions(grid: &str, slope: &Slope) -> u64 {
     let mut position = 0;
     grid.lines()
         .enumerate()
@@ -25,11 +25,11 @@ fn count_collisions(grid: &String, slope: &Slope) -> u64 {
         })
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     count_collisions(input, &Slope { down: 1, right: 3 })
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let slopes = [
         Slope { down: 1, right: 1 },
         Slope { down: 1, right: 3 },

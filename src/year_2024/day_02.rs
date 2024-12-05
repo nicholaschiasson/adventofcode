@@ -47,7 +47,7 @@ pub fn part_02(input: &str) -> u64 {
     safe
 }
 
-fn is_safe(report: &Vec<i64>) -> bool {
+fn is_safe(report: &[i64]) -> bool {
     let mut sign = 0;
     let mut damper = None;
     let mut previous = None;

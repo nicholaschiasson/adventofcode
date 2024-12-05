@@ -24,7 +24,7 @@ fn elf_game(nums: Vec<u64>, nth: u64) -> u64 {
     last
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let nums = input
         .split(',')
         .map(|n| n.parse::<u64>().unwrap())
@@ -32,7 +32,7 @@ pub fn part_01(input: &String) -> u64 {
     elf_game(nums, 2020)
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let nums = input
         .split(',')
         .map(|n| n.parse::<u64>().unwrap())

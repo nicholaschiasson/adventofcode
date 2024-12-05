@@ -81,7 +81,7 @@ impl FromStr for Board {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let draw = input
         .split("\n\n")
         .take(1)
@@ -108,7 +108,7 @@ pub fn part_01(input: &String) -> u64 {
         .unwrap() as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let draw = input
         .split("\n\n")
         .take(1)

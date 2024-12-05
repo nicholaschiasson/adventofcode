@@ -24,7 +24,7 @@ fn neighbours((y, x): (usize, usize), height: usize, width: usize) -> Vec<(usize
     neighbours
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let map = input
         .lines()
         .map(|l| {
@@ -49,7 +49,7 @@ pub fn part_01(input: &String) -> u64 {
     risk as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let map = input
         .lines()
         .map(|l| {

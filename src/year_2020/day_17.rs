@@ -251,7 +251,7 @@ impl<T: Point> Display for Space<T> {
     }
 }
 
-fn parse_input<T: Point>(input: &String) -> Space<T> {
+fn parse_input<T: Point>(input: &str) -> Space<T> {
     let mut space = Space::new();
     input.lines().enumerate().for_each(|(y, line)| {
         line.chars().enumerate().for_each(|(x, c)| {
@@ -261,7 +261,7 @@ fn parse_input<T: Point>(input: &String) -> Space<T> {
     space
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut space = parse_input::<Point3>(input);
     for _ in 0..6 {
         space.cycle();
@@ -272,7 +272,7 @@ pub fn part_01(input: &String) -> u64 {
         .fold(0, |sum, active| if *active { sum + 1 } else { sum })
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut space = parse_input::<Point4>(input);
     for _ in 0..6 {
         space.cycle();

@@ -98,7 +98,7 @@ impl FromStr for Paper {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let paper = input
         .split("\n\n")
         .take(1)
@@ -121,7 +121,7 @@ pub fn part_01(input: &String) -> u64 {
         .len() as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let paper = input
         .split("\n\n")
         .take(1)

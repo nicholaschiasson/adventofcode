@@ -1,4 +1,4 @@
-fn get_seat_id(seat: &String) -> u64 {
+fn get_seat_id(seat: &str) -> u64 {
     let row = seat.as_bytes()[..7]
         .iter()
         .fold(0, |r, b| (r | if *b == b'F' { 0 } else { 1 }) << 1)
@@ -10,9 +10,9 @@ fn get_seat_id(seat: &String) -> u64 {
     (row * 8) + col
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input.lines().fold(0, |id, seat| {
-        let seat_id = get_seat_id(&seat.to_string());
+        let seat_id = get_seat_id(seat);
         if seat_id > id {
             seat_id
         } else {
@@ -21,8 +21,8 @@ pub fn part_01(input: &String) -> u64 {
     })
 }
 
-pub fn part_02(input: &String) -> u64 {
-    let mut ids: Vec<u64> = input.lines().map(|s| get_seat_id(&s.to_string())).collect();
+pub fn part_02(input: &str) -> u64 {
+    let mut ids: Vec<u64> = input.lines().map(get_seat_id).collect();
     ids.sort();
     ids.iter()
         .enumerate()

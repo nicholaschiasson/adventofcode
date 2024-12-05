@@ -122,7 +122,7 @@ impl Passport {
     }
 }
 
-fn parse_passport(passport: &String) -> Passport {
+fn parse_passport(passport: &str) -> Passport {
     passport
         .replace(' ', "\n")
         .lines()
@@ -143,20 +143,17 @@ fn parse_passport(passport: &String) -> Passport {
         })
 }
 
-fn parse_passport_batch(batch: &String) -> Vec<Passport> {
-    batch
-        .split("\n\n")
-        .map(|p| parse_passport(&p.to_string()))
-        .collect()
+fn parse_passport_batch(batch: &str) -> Vec<Passport> {
+    batch.split("\n\n").map(parse_passport).collect()
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     parse_passport_batch(input)
         .iter()
         .fold(0, |v, p| v + if p.has_required_fields() { 1 } else { 0 })
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     parse_passport_batch(input)
         .iter()
         .fold(0, |v, p| v + if p.is_valid() { 1 } else { 0 })

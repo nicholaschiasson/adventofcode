@@ -59,15 +59,15 @@ fn step(octopuses: &mut Vec<Vec<DumboOctopus>>) -> u64 {
             }
         }
     }
-    for y in 0..octopuses.len() {
-        for x in 0..octopuses[y].len() {
-            octopuses[y][x].cooldown();
+    for row in octopuses {
+        for octopus in row {
+            octopus.cooldown();
         }
     }
     flashes
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut octopuses = input
         .lines()
         .enumerate()
@@ -84,7 +84,7 @@ pub fn part_01(input: &String) -> u64 {
     (0..100).fold(0, |f, _| f + step(&mut octopuses))
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut octopuses = input
         .lines()
         .enumerate()

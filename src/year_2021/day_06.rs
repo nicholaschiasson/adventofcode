@@ -1,7 +1,6 @@
-/**
- * Attempt 1
- * Naive
- */
+// Attempt 1
+// Naive
+
 // use std::str::FromStr;
 
 // #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -34,10 +33,9 @@
 // 	}
 // }
 
-/**
- * Attempt 2
- * Still billions of iterations
- */
+// Attempt 2
+// Still billions of iterations
+
 // #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 // struct Lanternfish {
 // 	counter: i32,
@@ -70,11 +68,9 @@
 // 	}
 // }
 
-/**
- * Attempt 3
- * Sought help - get it now
- * Use an array just to keep track of how many fish there are by number of days until they reproduce
- */
+// Attempt 3
+// Sought help - get it now
+// Use an array just to keep track of how many fish there are by number of days until they reproduce
 struct LanternfishColony {
     counts: Vec<u64>,
     pregnancy: usize,
@@ -102,7 +98,7 @@ impl LanternfishColony {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     LanternfishColony::new(
         input
             .split(',')
@@ -115,7 +111,7 @@ pub fn part_01(input: &String) -> u64 {
     .sum()
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     LanternfishColony::new(
         input
             .split(',')

@@ -174,7 +174,7 @@ impl FromStr for Action {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let Vector(_, Point(x, y)) = input
         .lines()
         .map(|l| l.parse::<Action>().expect("Failed to parse action"))
@@ -184,7 +184,7 @@ pub fn part_01(input: &String) -> u64 {
     (x.abs() + y.abs()) as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let ShipState(Point(x, y), _) = input
         .lines()
         .map(|l| l.parse::<Action>().expect("Failed to parse action"))

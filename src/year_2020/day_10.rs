@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut adapters = input
         .lines()
         .map(|l| l.parse::<u64>().unwrap())
@@ -18,7 +18,7 @@ pub fn part_01(input: &String) -> u64 {
     differences[0] * (differences[2] + 1)
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut adapters = input
         .lines()
         .map(|l| l.parse::<u64>().unwrap())

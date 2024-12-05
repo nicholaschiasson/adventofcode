@@ -28,7 +28,7 @@ impl Clone for Rule {
     }
 }
 
-fn parse_rules(rules: &String) -> HashMap<String, Rule> {
+fn parse_rules(rules: &str) -> HashMap<String, Rule> {
     let r_tups = rules
         .lines()
         .filter(|l| !l.ends_with(" no other bags."))
@@ -74,14 +74,14 @@ fn parse_rules(rules: &String) -> HashMap<String, Rule> {
     m
 }
 
-fn get_parents(rules: &HashMap<String, Rule>, parents: &mut HashSet<String>, name: &String) {
+fn get_parents(rules: &HashMap<String, Rule>, parents: &mut HashSet<String>, name: &str) {
     rules.get(name).unwrap().parents.iter().for_each(|p| {
         parents.insert(p.to_string());
         get_parents(rules, parents, p);
     });
 }
 
-fn count_children(rules: &HashMap<String, Rule>, name: &String) -> u64 {
+fn count_children(rules: &HashMap<String, Rule>, name: &str) -> u64 {
     rules
         .get(name)
         .unwrap()
@@ -93,14 +93,14 @@ fn count_children(rules: &HashMap<String, Rule>, name: &String) -> u64 {
         })
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut parents = HashSet::new();
-    get_parents(&parse_rules(input), &mut parents, &"shiny gold".to_string());
+    get_parents(&parse_rules(input), &mut parents, "shiny gold");
     parents.len() as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
-    count_children(&parse_rules(input), &"shiny gold".to_string())
+pub fn part_02(input: &str) -> u64 {
+    count_children(&parse_rules(input), "shiny gold")
 }
 
 #[cfg(test)]

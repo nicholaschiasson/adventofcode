@@ -16,13 +16,13 @@ fn try_calculate_fuel(mass: i64) -> Option<u64> {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input.lines().fold(0, |fuel, mass| {
         fuel + calculate_fuel(mass.parse::<i64>().expect("Failed to parse mass"))
     })
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     input.lines().fold(0, |fuel, mass| {
         let mut fuel_mass = calculate_fuel(mass.parse::<i64>().expect("Failed to parse mass"));
         let mut sum_fuel = fuel + fuel_mass;

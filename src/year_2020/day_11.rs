@@ -23,7 +23,7 @@ impl Display for Space {
 
 struct Position(isize, isize);
 
-fn parse_grid(grid: &String) -> Vec<Vec<Space>> {
+fn parse_grid(grid: &str) -> Vec<Vec<Space>> {
     grid.lines()
         .map(|l| {
             l.as_bytes()
@@ -31,14 +31,14 @@ fn parse_grid(grid: &String) -> Vec<Vec<Space>> {
                 .map(|c| match c {
                     b'#' => Space::OccupiedSeat,
                     b'L' => Space::EmptySeat,
-                    b'.' | _ => Space::Floor,
+                    _ => Space::Floor,
                 })
                 .collect::<Vec<_>>()
         })
         .collect::<Vec<_>>()
 }
 
-fn count_adjacent_occupancies(grid: &Vec<Vec<Space>>, position: Position, scan: bool) -> u64 {
+fn count_adjacent_occupancies(grid: &[Vec<Space>], position: Position, scan: bool) -> u64 {
     let Position(y, x) = position;
     let mut count = 0;
     for i in -1..=1 {
@@ -73,11 +73,7 @@ fn count_adjacent_occupancies(grid: &Vec<Vec<Space>>, position: Position, scan: 
     count
 }
 
-fn compute_seating(
-    grid: &Vec<Vec<Space>>,
-    discomfort_threshold: u64,
-    scan: bool,
-) -> Vec<Vec<Space>> {
+fn compute_seating(grid: &[Vec<Space>], discomfort_threshold: u64, scan: bool) -> Vec<Vec<Space>> {
     grid.iter()
         .enumerate()
         .map(|(i, row)| {
@@ -127,7 +123,7 @@ impl Clamp for isize {
 }
 
 #[allow(dead_code)]
-fn print_grid(grid: &Vec<Vec<Space>>) -> String {
+fn print_grid(grid: &[Vec<Space>]) -> String {
     grid.iter().fold(String::new(), |mut s, r| {
         s.extend(r.iter().map(|s| s.to_string()));
         s.extend(&['\n']);
@@ -135,7 +131,7 @@ fn print_grid(grid: &Vec<Vec<Space>>) -> String {
     })
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut grid = parse_grid(input);
     loop {
         let previous = grid.to_vec();
@@ -153,7 +149,7 @@ pub fn part_01(input: &String) -> u64 {
     })
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut grid = parse_grid(input);
     loop {
         let previous = grid.to_vec();

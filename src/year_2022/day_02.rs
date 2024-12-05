@@ -65,13 +65,7 @@ impl FromStr for Hand {
 
 impl Ord for Hand {
     fn cmp(&self, other: &Self) -> Ordering {
-        self.partial_cmp(other).expect("partial comparison success")
-    }
-}
-
-impl PartialOrd for Hand {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(match (self, other) {
+        match (self, other) {
             (Self::Paper, Self::Rock)
             | (Self::Scissors, Self::Paper)
             | (Self::Rock, Self::Scissors) => Ordering::Greater,
@@ -79,7 +73,13 @@ impl PartialOrd for Hand {
             | (Self::Paper, Self::Scissors)
             | (Self::Scissors, Self::Rock) => Ordering::Less,
             _ => Ordering::Equal,
-        })
+        }
+    }
+}
+
+impl PartialOrd for Hand {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
     }
 }
 
@@ -113,7 +113,7 @@ impl FromStr for StrategyGuide {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input
         .lines()
         .map(|l| {
@@ -130,7 +130,7 @@ pub fn part_01(input: &String) -> u64 {
         .sum()
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     input
         .lines()
         .map(|l| l.parse::<StrategyGuide>().expect("valid strategy guide"))

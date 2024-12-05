@@ -26,7 +26,7 @@ fn parse_instruction(instruction: &str) -> Vec<usize> {
         .collect::<Vec<_>>()
 }
 
-fn collect_top_crates(stacks: &Vec<Vec<char>>) -> String {
+fn collect_top_crates(stacks: &[Vec<char>]) -> String {
     stacks
         .iter()
         .filter(|s| !s.is_empty())
@@ -35,7 +35,7 @@ fn collect_top_crates(stacks: &Vec<Vec<char>>) -> String {
         .join("")
 }
 
-pub fn part_01(input: &String) -> String {
+pub fn part_01(input: &str) -> String {
     let (stacks, instructions) = input.split_once("\n\n").expect("correctly formatted input");
     let mut stacks = parse_stacks(stacks);
 
@@ -50,7 +50,7 @@ pub fn part_01(input: &String) -> String {
     collect_top_crates(&stacks)
 }
 
-pub fn part_02(input: &String) -> String {
+pub fn part_02(input: &str) -> String {
     let (stacks, instructions) = input.split_once("\n\n").expect("correctly formatted input");
     let mut stacks = parse_stacks(stacks);
 

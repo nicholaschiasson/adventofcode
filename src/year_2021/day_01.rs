@@ -1,4 +1,4 @@
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input
         .lines()
         .scan(None, |s, x| {
@@ -15,7 +15,7 @@ pub fn part_01(input: &String) -> u64 {
         .count() as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let parsed = input
         .lines()
         .map(|x| x.parse::<i32>().expect("failed to parse integer"));

@@ -1,4 +1,6 @@
-pub fn part_01(input: &String) -> u64 {
+use std::cmp::Ordering;
+
+pub fn part_01(input: &str) -> u64 {
     let mut gamma_bits = Vec::<u32>::new();
     let mut epsilon_bits = Vec::<u32>::new();
     input.lines().for_each(|d| {
@@ -31,7 +33,7 @@ pub fn part_01(input: &String) -> u64 {
     gamma * epsilon
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut oxygen_lines = input.lines().collect::<Vec<_>>();
     let mut c02_lines = input.lines().collect::<Vec<_>>();
     let mut i = 0;
@@ -41,22 +43,16 @@ pub fn part_02(input: &String) -> u64 {
             a + if Some('1') == l.chars().nth(i) { 1 } else { 0 }
         });
         let count = oxygen_lines.len();
-        let common_bit = if count - ones == ones {
-            None
-        } else if count - ones > ones {
-            Some('0')
-        } else {
-            Some('1')
+        let common_bit = match (count - ones).cmp(&ones) {
+            Ordering::Equal => None,
+            Ordering::Greater => Some('0'),
+            Ordering::Less => Some('1'),
         };
         oxygen_lines = oxygen_lines
             .iter()
             .filter(|&l| {
                 if common_bit.is_none() {
-                    if let Some('1') = l.chars().nth(i) {
-                        true
-                    } else {
-                        false
-                    }
+                    matches!(l.chars().nth(i), Some('1'))
                 } else {
                     common_bit == l.chars().nth(i)
                 }
@@ -71,22 +67,16 @@ pub fn part_02(input: &String) -> u64 {
             a + if Some('1') == l.chars().nth(i) { 1 } else { 0 }
         });
         let count = c02_lines.len();
-        let common_bit = if count - ones == ones {
-            None
-        } else if count - ones > ones {
-            Some('0')
-        } else {
-            Some('1')
+        let common_bit = match (count - ones).cmp(&ones) {
+            Ordering::Equal => None,
+            Ordering::Greater => Some('0'),
+            Ordering::Less => Some('1'),
         };
         c02_lines = c02_lines
             .iter()
             .filter(|&l| {
                 if common_bit.is_none() {
-                    if let Some('0') = l.chars().nth(i) {
-                        true
-                    } else {
-                        false
-                    }
+                    matches!(l.chars().nth(i), Some('0'))
                 } else {
                     common_bit != l.chars().nth(i)
                 }

@@ -1,4 +1,4 @@
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let expenses: Vec<u64> = input
         .lines()
         .map(|e| e.parse::<u64>().expect("Failed to parse input"))
@@ -13,7 +13,7 @@ pub fn part_01(input: &String) -> u64 {
     0
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let expenses: Vec<u64> = input
         .lines()
         .map(|e| e.parse::<u64>().expect("Failed to parse input"))

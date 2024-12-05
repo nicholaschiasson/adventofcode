@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let priorities = [
         (b'a'..=b'z').collect::<Vec<_>>(),
         (b'A'..=b'Z').collect::<Vec<_>>(),
@@ -26,7 +26,7 @@ pub fn part_01(input: &String) -> u64 {
         .sum()
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let priorities = [
         (b'a'..=b'z').collect::<Vec<_>>(),
         (b'A'..=b'Z').collect::<Vec<_>>(),

@@ -50,7 +50,7 @@ impl Position {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input
         .lines()
         .map(|x| x.split_whitespace())
@@ -72,7 +72,7 @@ pub fn part_01(input: &String) -> u64 {
         .product() as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     input
         .lines()
         .map(|x| x.split_whitespace())

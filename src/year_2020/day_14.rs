@@ -39,7 +39,7 @@ fn set_bit(num: u64, bit: u64) -> u64 {
     num | (1 << bit)
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut mask = String::new();
     let mut mem = HashMap::new();
     input.lines().for_each(|l| {
@@ -71,7 +71,7 @@ pub fn part_01(input: &String) -> u64 {
     mem.iter().fold(0, |sum, (_, v)| sum + v)
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut mask = String::new();
     let mut mem = HashMap::new();
     input.lines().for_each(|l| {

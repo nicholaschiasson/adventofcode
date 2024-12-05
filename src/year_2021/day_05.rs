@@ -139,14 +139,14 @@ impl FromStr for Chart {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input
         .parse::<Chart>()
         .expect("failed to parse chart of vents")
         .num_points_with_danger(2) as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     input
         .parse::<Chart>()
         .expect("failed to parse chart of vents")

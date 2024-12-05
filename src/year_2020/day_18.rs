@@ -140,13 +140,13 @@ impl Display for Operator {
     }
 }
 
-pub fn part_01(input: &String) -> i64 {
+pub fn part_01(input: &str) -> i64 {
     input
         .lines()
         .fold(0, |sum, l| sum + parse_expression(l).0.evaluate())
 }
 
-pub fn part_02(input: &String) -> i64 {
+pub fn part_02(input: &str) -> i64 {
     input
         .lines()
         .fold(0, |sum, l| sum + parse_expression(l).0.advanced_evaluate())

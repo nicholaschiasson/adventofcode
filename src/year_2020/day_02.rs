@@ -14,7 +14,7 @@ enum PolicyAuthority {
     SledRental,
 }
 
-fn parse_policy(input: &String, authority: PolicyAuthority) -> PasswordPolicy {
+fn parse_policy(input: &str, authority: PolicyAuthority) -> PasswordPolicy {
     let policy_str = input.split(": ").collect::<Vec<&str>>()[0];
     let limits = policy_str.split(' ').collect::<Vec<&str>>()[0]
         .split('-')
@@ -36,11 +36,11 @@ fn parse_policy(input: &String, authority: PolicyAuthority) -> PasswordPolicy {
     }
 }
 
-fn parse_password(input: &String) -> String {
+fn parse_password(input: &str) -> String {
     input.split(": ").collect::<Vec<&str>>()[1].into()
 }
 
-fn validate_password(password: &String, policy: &PasswordPolicy) -> bool {
+fn validate_password(password: &str, policy: &PasswordPolicy) -> bool {
     match policy.authority {
         PolicyAuthority::SledRental => {
             let occurrences = password
@@ -60,7 +60,7 @@ fn validate_password(password: &String, policy: &PasswordPolicy) -> bool {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let password_list: Vec<String> = input.split('\n').map(|s| s.to_string()).collect();
     let mut valid_passwords = 0;
     for p in password_list {
@@ -75,7 +75,7 @@ pub fn part_01(input: &String) -> u64 {
     valid_passwords
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let password_list: Vec<String> = input.split('\n').map(|s| s.to_string()).collect();
     let mut valid_passwords = 0;
     for p in password_list {

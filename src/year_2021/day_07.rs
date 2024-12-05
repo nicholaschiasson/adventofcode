@@ -1,4 +1,4 @@
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut positions = input
         .split(',')
         .map(|f| f.parse::<i32>().unwrap())
@@ -8,7 +8,7 @@ pub fn part_01(input: &String) -> u64 {
     positions.iter().fold(0, |f, &p| f + (target - p).abs()) as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let positions = input
         .split(',')
         .map(|f| f.parse::<i32>().unwrap())
@@ -52,7 +52,7 @@ mod tests {
 
     #[test]
     fn part_02() {
-        assert_eq!(super::part_02(&String::from("16,1,2,0,4,2,7,1,2,14")), 168);
+        assert_eq!(super::part_02("16,1,2,0,4,2,7,1,2,14"), 168);
         assert_eq!(
             super::part_02(&read_resource(relative_input_path(&format!(
                 "{}::practice_01",

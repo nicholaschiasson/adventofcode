@@ -20,7 +20,7 @@ impl FromStr for SectionAssignmentPair {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input
         .lines()
         .map(|l| {
@@ -33,7 +33,7 @@ pub fn part_01(input: &String) -> u64 {
         .count() as u64
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     input
         .lines()
         .map(|l| {

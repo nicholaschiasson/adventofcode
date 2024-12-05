@@ -157,7 +157,7 @@ impl Hand {
 }
 impl Display for Hand {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.cards.iter().fold(Ok(()), |_, c| write!(f, "{c}"))
+        self.cards.iter().try_fold((), |_, c| write!(f, "{c}"))
     }
 }
 

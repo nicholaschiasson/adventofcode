@@ -2,9 +2,9 @@ use lexical::parse_partial;
 
 use crate::utils::modulo;
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let (earliest_departure, i) = parse_partial::<u64, _>(input.as_bytes()).unwrap();
-    let (time, id) = input.as_str()[i + 1..]
+    let (time, id) = input[i + 1..]
         .split(',')
         .map(|s| s.trim())
         .filter(|s| s != &"x")
@@ -20,9 +20,9 @@ pub fn part_01(input: &String) -> u64 {
     (time - earliest_departure) * id
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let (_, i) = parse_partial::<u64, _>(input.as_bytes()).unwrap();
-    let ids = input.as_str()[i + 1..]
+    let ids = input[i + 1..]
         .split(',')
         .map(|s| s.trim())
         .collect::<Vec<&str>>();

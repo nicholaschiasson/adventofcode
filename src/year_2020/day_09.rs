@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-fn find_outlier(sequence: &Vec<i64>, preamble: usize) -> i64 {
+fn find_outlier(sequence: &[i64], preamble: usize) -> i64 {
     let mut prev_five = sequence
         .iter()
         .take(preamble)
@@ -23,7 +23,7 @@ fn find_outlier(sequence: &Vec<i64>, preamble: usize) -> i64 {
         .unwrap()
 }
 
-pub fn part_01(input: &String, preamble: usize) -> u64 {
+pub fn part_01(input: &str, preamble: usize) -> u64 {
     let sequence = input
         .lines()
         .map(|l| l.parse::<i64>().unwrap())
@@ -31,7 +31,7 @@ pub fn part_01(input: &String, preamble: usize) -> u64 {
     find_outlier(&sequence, preamble) as u64
 }
 
-pub fn part_02(input: &String, preamble: usize) -> u64 {
+pub fn part_02(input: &str, preamble: usize) -> u64 {
     let sequence = input
         .lines()
         .map(|l| l.parse::<i64>().unwrap())
@@ -42,13 +42,13 @@ pub fn part_02(input: &String, preamble: usize) -> u64 {
         let mut sum = sequence[i];
         let mut largest = sum;
         let mut smallest = sum;
-        for j in (i + 1)..(outlier_idx - 1) {
-            sum += sequence[j];
-            if sequence[j] > largest {
-                largest = sequence[j];
+        for &n in sequence.iter().take(outlier_idx - 1).skip(i + 1) {
+            sum += n;
+            if n > largest {
+                largest = n;
             }
-            if sequence[j] < smallest {
-                smallest = sequence[j];
+            if n < smallest {
+                smallest = n;
             }
             if sum > outlier {
                 break;

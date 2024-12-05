@@ -86,14 +86,14 @@ impl Boot {
     }
 }
 
-fn parse_instructions(instructions: &String) -> Vec<Instruction> {
+fn parse_instructions(instructions: &str) -> Vec<Instruction> {
     instructions
         .lines()
         .map(|l| l.parse::<Instruction>().unwrap())
         .collect()
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     let mut boot = Boot {
         accumulator: 0,
         current_instruction: 0,
@@ -107,16 +107,13 @@ pub fn part_01(input: &String) -> u64 {
     }
 }
 
-pub fn part_02(input: &String) -> i64 {
+pub fn part_02(input: &str) -> i64 {
     let mut a = None;
     let instructions = parse_instructions(input);
     instructions
         .iter()
         .enumerate()
-        .filter(|(_, i)| match i {
-            Instruction::Jump(_) | Instruction::NoOperation(_) => true,
-            _ => false,
-        })
+        .filter(|(_, i)| matches!(i, Instruction::Jump(_) | Instruction::NoOperation(_)))
         .find(|(n, _)| {
             let mut inst = instructions.clone();
             if let Instruction::Jump(v) = inst[*n] {

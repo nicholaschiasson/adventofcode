@@ -69,7 +69,7 @@ impl From<char> for Enclosing {
     }
 }
 
-pub fn part_01(input: &String) -> u64 {
+pub fn part_01(input: &str) -> u64 {
     input
         .lines()
         .map(|l| {
@@ -93,7 +93,7 @@ pub fn part_01(input: &String) -> u64 {
         .sum()
 }
 
-pub fn part_02(input: &String) -> u64 {
+pub fn part_02(input: &str) -> u64 {
     let mut valid = input
         .lines()
         .filter_map(|l| {
