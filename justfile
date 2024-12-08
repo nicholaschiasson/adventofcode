@@ -1,3 +1,8 @@
+bootstrap YEAR DAY:
+  cp template/lib.rs src/year_{{YEAR}}/day_{{DAY}}.rs
+  mkdir -p rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests
+  touch rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests/{practice_01,final}.txt
+
 build *ARGS:
   cargo build {{ARGS}}
 
