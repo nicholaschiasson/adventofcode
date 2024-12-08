@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 enum Operator {
     Add,
     Mul,
@@ -5,22 +7,57 @@ enum Operator {
 }
 
 impl Operator {
-    fn operate(&self, lhs: u64, rhs: u64) -> u64 {
+    fn apply(&self, lhs: u64, rhs: u64) -> Option<u64> {
+        if lhs < rhs {
+            return None;
+        }
         match self {
-            Self::Add => lhs + rhs,
-            Self::Mul => lhs * rhs,
-            Self::Cat => lhs * u64::pow(10, rhs.ilog10() + 1) + rhs,
+            Operator::Add => Some(lhs - rhs),
+            Operator::Mul => {
+                if lhs % rhs == 0 {
+                    lhs.checked_div(rhs)
+                } else {
+                    None
+                }
+            }
+            Operator::Cat => {
+                let difference = lhs - rhs;
+                let denominator = u64::pow(10, rhs.ilog10() + 1);
+                if difference % denominator == 0 {
+                    difference.checked_div(denominator)
+                } else {
+                    None
+                }
+            }
         }
     }
 }
 
-fn is_possible(target: u64, accumulator: u64, operands: &[u64], operators: &[Operator]) -> bool {
-    if let Some((&first, ops)) = operands.split_first() {
-        operators
-            .iter()
-            .any(|op| is_possible(target, op.operate(accumulator, first), ops, operators))
+impl Display for Operator {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}",
+            match self {
+                Operator::Add => "+",
+                Operator::Mul => "*",
+                Operator::Cat => "||",
+            }
+        )
+    }
+}
+
+fn is_possible(target: u64, operators: &[Operator], operands: &[u64]) -> bool {
+    if let Some((&last, ops)) = operands.split_last() {
+        operators.iter().any(|operator| {
+            if let Some(t) = operator.apply(target, last) {
+                is_possible(t, operators, ops)
+            } else {
+                false
+            }
+        })
     } else {
-        accumulator == target
+        target == 0
     }
 }
 
@@ -35,7 +72,7 @@ pub fn part_01(input: &str) -> u64 {
                 .flat_map(|o| o.parse::<u64>())
                 .collect::<Vec<_>>();
             if let Ok(target) = target {
-                if is_possible(target, 0, &operands, &[Add, Mul]) {
+                if is_possible(target, &[Mul, Add], &operands) {
                     sum += target;
                 }
             }
@@ -55,7 +92,7 @@ pub fn part_02(input: &str) -> u64 {
                 .flat_map(|o| o.parse::<u64>())
                 .collect::<Vec<_>>();
             if let Ok(target) = target {
-                if is_possible(target, 0, &operands, &[Add, Mul, Cat]) {
+                if is_possible(target, &[Mul, Cat, Add], &operands) {
                     sum += target;
                 }
             }
