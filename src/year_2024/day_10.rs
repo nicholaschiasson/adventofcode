@@ -1,31 +1,81 @@
-use std::collections::{HashSet, VecDeque};
+use std::collections::HashSet;
+
+type Grid = Vec<Vec<i8>>;
+type Point = (usize, usize);
+
+fn find_trails(grid: &Grid, (x, y): Point) -> (HashSet<Point>, u64) {
+    let mut trails = 0;
+    let mut ends = HashSet::new();
+    if let Some(&n) = grid.get(y).and_then(|row| row.get(x)) {
+        if n == 9 {
+            trails = 1;
+            ends.insert((x, y));
+        } else {
+            for i in 0..4 {
+                let i = (i * 2) + 1;
+                let dx = i % 3;
+                let dy = i / 3;
+                if x + dx > 0 && y + dy > 0 {
+                    let dx = x + dx - 1;
+                    let dy = y + dy - 1;
+                    if let Some(&m) = grid.get(dy).and_then(|row| row.get(dx)) {
+                        if m - n == 1 {
+                            let (e, t) = find_trails(grid, (dx, dy));
+                            trails += t;
+                            ends = ends.union(&e).copied().collect::<HashSet<_>>();
+                        }
+                    }
+                }
+            }
+        };
+    }
+    (ends, trails)
+}
 
 pub fn part_01(input: &str) -> u64 {
-    let grid: Vec<Vec<u32>> = input
+    let mut trailheads = Vec::new();
+    let grid: Vec<Vec<i8>> = input
         .lines()
-        .map(|l| l.chars().flat_map(|c| c.to_digit(10)).collect())
+        .enumerate()
+        .map(|(y, l)| {
+            l.chars()
+                .enumerate()
+                .inspect(|&(x, c)| {
+                    if c == '0' {
+                        trailheads.push((x, y));
+                    }
+                })
+                .map(|(_, c)| c.to_digit(10).unwrap_or(u8::MAX as u32) as i8)
+                .collect()
+        })
         .collect();
 
-    let ranks = vec![vec![HashSet::new(); grid[0].len()]; grid.len()];
-
-    let mut queue = VecDeque::new();
-    for (y, row) in grid.iter().enumerate() {
-        for (x, &n) in row.iter().enumerate() {
-            if n == 9 {
-                queue.push_back((x, y));
-            }
-        }
-    }
-
-    while let Some((x, y)) = queue.pop_front() {
-        if let Some(n) = grid.get(y).and_then(|row| row.get(x)) {}
-    }
-
-    0
+    trailheads
+        .into_iter()
+        .fold(0, |a, h| a + find_trails(&grid, h).0.len()) as u64
 }
 
 pub fn part_02(input: &str) -> u64 {
-    todo!()
+    let mut trailheads = Vec::new();
+    let grid: Vec<Vec<i8>> = input
+        .lines()
+        .enumerate()
+        .map(|(y, l)| {
+            l.chars()
+                .enumerate()
+                .inspect(|&(x, c)| {
+                    if c == '0' {
+                        trailheads.push((x, y));
+                    }
+                })
+                .map(|(_, c)| c.to_digit(10).unwrap_or(u8::MAX as u32) as i8)
+                .collect()
+        })
+        .collect();
+
+    trailheads
+        .into_iter()
+        .fold(0, |a, h| a + find_trails(&grid, h).1) as u64
 }
 
 #[cfg(test)]
@@ -70,7 +120,7 @@ mod tests {
             super::part_01(&read_resource(relative_input_path(&format!(
                 "{INPUT_PATH}::final"
             )))),
-            0
+            816
         );
     }
 
@@ -78,15 +128,33 @@ mod tests {
     fn part_02() {
         assert_eq!(
             super::part_02(&read_resource(relative_input_path(&format!(
-                "{INPUT_PATH}::practice_01"
+                "{INPUT_PATH}::practice_06"
             )))),
-            0
+            3
+        );
+        assert_eq!(
+            super::part_02(&read_resource(relative_input_path(&format!(
+                "{INPUT_PATH}::practice_07"
+            )))),
+            13
+        );
+        assert_eq!(
+            super::part_02(&read_resource(relative_input_path(&format!(
+                "{INPUT_PATH}::practice_08"
+            )))),
+            227
+        );
+        assert_eq!(
+            super::part_02(&read_resource(relative_input_path(&format!(
+                "{INPUT_PATH}::practice_09"
+            )))),
+            81
         );
         assert_eq!(
             super::part_02(&read_resource(relative_input_path(&format!(
                 "{INPUT_PATH}::final"
             )))),
-            0
+            1960
         );
     }
 }
