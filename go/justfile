@@ -1,0 +1,34 @@
+bootstrap YEAR DAY:
+  mkdir -p year_{{YEAR}}/day_{{DAY}}
+  echo "package day{{DAY}}" > year_{{YEAR}}/day_{{DAY}}/part_01.go
+  echo "package day{{DAY}}" > year_{{YEAR}}/day_{{DAY}}/part_02.go
+  echo "package day{{DAY}}" > year_{{YEAR}}/day_{{DAY}}/part_01_test.go
+  echo "package day{{DAY}}" > year_{{YEAR}}/day_{{DAY}}/part_02_test.go
+  cat template/_part_01.go >> year_{{YEAR}}/day_{{DAY}}/part_01.go
+  cat template/_part_02.go >> year_{{YEAR}}/day_{{DAY}}/part_02.go
+  cat template/_part_01_test.go >> year_{{YEAR}}/day_{{DAY}}/part_01_test.go
+  cat template/_part_02_test.go >> year_{{YEAR}}/day_{{DAY}}/part_02_test.go
+
+build *ARGS:
+  go build ./... {{ARGS}}
+
+check *ARGS:
+  @echo '{{ style("warning") }}No check for go{{ NORMAL }}'
+
+clean *ARGS:
+  go clean ./... {{ARGS}}
+
+format *ARGS:
+  go fmt ./... {{ARGS}}
+
+lint *ARGS:
+  @echo '{{ style("warning") }}No linter for go{{ NORMAL }}'
+
+run *ARGS:
+  go run ./... {{ARGS}}
+
+test *ARGS:
+  go test ./... {{ARGS}}
+
+watch *ARGS:
+  watchexec -e go {{ARGS}}

@@ -1,30 +1,51 @@
-bootstrap YEAR DAY:
-  mkdir -p src/year_{{YEAR}}
-  cp template/lib.rs src/year_{{YEAR}}/day_{{DAY}}.rs
-  mkdir -p rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests
-  touch rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests/{practice_01,final}.txt
+default: test-all
 
-build *ARGS:
-  cargo build {{ARGS}}
+bootstrap-all YEAR DAY PRACTICE_INPUT="1": (bootstrap "go" YEAR DAY PRACTICE_INPUT) (bootstrap "rust" YEAR DAY PRACTICE_INPUT)
 
-check *ARGS:
-  cargo check {{ARGS}}
+build-all *ARGS: (build "go" ARGS) (build "rust" ARGS)
 
-clean *ARGS:
-  cargo clean {{ARGS}}
+check-all *ARGS: (check "go" ARGS) (check "rust" ARGS)
 
-format *ARGS:
+clean-all *ARGS: (clean "go" ARGS) (clean "rust" ARGS)
+
+format-all *ARGS: (format "go" ARGS) (format "rust" ARGS)
   nixfmt $(find . -type f -name "*.nix")
-  cargo fmt {{ARGS}}
 
-lint *ARGS:
-  cargo clippy {{ARGS}}
+lint-all *ARGS: (lint "go" ARGS) (lint "rust" ARGS)
 
-run *ARGS:
-  cargo run {{ARGS}}
+run-all *ARGS: (run "go" ARGS) (run "rust" ARGS)
 
-test *ARGS:
-  cargo test {{ARGS}}
+test-all *ARGS: (test "go" ARGS) (test "rust" ARGS)
 
-watch *ARGS:
-  cargo watch {{ARGS}}
+bootstrap LANG YEAR DAY PRACTICE_INPUT="1":
+  mkdir -p rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests
+  touch rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests/final.txt
+  for i in {0..{{PRACTICE_INPUT}}}; do \
+    touch rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests/practice_${i}.txt; \
+  done
+  just {{LANG}}/bootstrap {{YEAR}} {{DAY}}
+
+build LANG *ARGS:
+  just {{LANG}}/build {{ARGS}}
+
+check LANG *ARGS:
+  just {{LANG}}/check {{ARGS}}
+
+clean LANG *ARGS:
+  just {{LANG}}/clean {{ARGS}}
+
+format LANG *ARGS:
+  just {{LANG}}/format {{ARGS}}
+
+lint LANG *ARGS:
+  just {{LANG}}/lint {{ARGS}}
+
+run LANG *ARGS:
+  just {{LANG}}/run {{ARGS}}
+
+test LANG *ARGS:
+  just {{LANG}}/test {{ARGS}}
+
+watch LANG *ARGS:
+  just {{LANG}}/watch {{ARGS}}
+

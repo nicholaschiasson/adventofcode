@@ -24,7 +24,7 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
-        rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+        rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust/rust-toolchain.toml;
         nativeBuildInputs = with pkgs; [
           pkg-config
           rustToolchain
@@ -41,6 +41,7 @@
           nixfmt-rfc-style
           rust-analyzer
           starship
+          watchexec
         ];
       in
       with pkgs;

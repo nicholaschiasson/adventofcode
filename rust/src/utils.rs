@@ -12,6 +12,8 @@ pub fn read_resource(relative_path: PathBuf) -> String {
     fs::read_to_string(
         env::current_dir()
             .expect("Failed to get current directory")
+            .parent()
+            .expect("Failed to get parent directory")
             .join("rsrc")
             .join(relative_path),
     )

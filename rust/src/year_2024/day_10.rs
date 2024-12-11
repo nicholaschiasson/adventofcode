@@ -75,7 +75,7 @@ pub fn part_02(input: &str) -> u64 {
 
     trailheads
         .into_iter()
-        .fold(0, |a, h| a + find_trails(&grid, h).1) as u64
+        .fold(0, |a, h| a + find_trails(&grid, h).1)
 }
 
 #[cfg(test)]
