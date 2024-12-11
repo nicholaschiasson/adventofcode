@@ -59,12 +59,12 @@ impl Display for Tile {
             f,
             "{}",
             match self {
-                Tile::Empty => '.',
-                Tile::Obstruction => '#',
-                Tile::Guard(Direction::Up) => '^',
-                Tile::Guard(Direction::Right) => '>',
-                Tile::Guard(Direction::Down) => 'v',
-                Tile::Guard(Direction::Left) => '<',
+                Self::Empty => '.',
+                Self::Obstruction => '#',
+                Self::Guard(Direction::Up) => '^',
+                Self::Guard(Direction::Right) => '>',
+                Self::Guard(Direction::Down) => 'v',
+                Self::Guard(Direction::Left) => '<',
             },
         )
     }
@@ -136,7 +136,7 @@ impl Grid {
         }
     }
 
-    fn start(&self) -> (Position, Direction) {
+    const fn start(&self) -> (Position, Direction) {
         (self.1, self.2)
     }
 

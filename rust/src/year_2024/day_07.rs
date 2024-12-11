@@ -7,20 +7,20 @@ enum Operator {
 }
 
 impl Operator {
-    fn apply(&self, lhs: u64, rhs: u64) -> Option<u64> {
+    const fn apply(&self, lhs: u64, rhs: u64) -> Option<u64> {
         if lhs < rhs {
             return None;
         }
         match self {
-            Operator::Add => Some(lhs - rhs),
-            Operator::Mul => {
+            Self::Add => Some(lhs - rhs),
+            Self::Mul => {
                 if lhs % rhs == 0 {
                     lhs.checked_div(rhs)
                 } else {
                     None
                 }
             }
-            Operator::Cat => {
+            Self::Cat => {
                 let difference = lhs - rhs;
                 let denominator = u64::pow(10, rhs.ilog10() + 1);
                 if difference % denominator == 0 {
@@ -39,9 +39,9 @@ impl Display for Operator {
             f,
             "{}",
             match self {
-                Operator::Add => "+",
-                Operator::Mul => "*",
-                Operator::Cat => "||",
+                Self::Add => "+",
+                Self::Mul => "*",
+                Self::Cat => "||",
             }
         )
     }
@@ -64,7 +64,7 @@ fn is_possible(target: u64, operators: &[Operator], operands: &[u64]) -> bool {
 pub fn part_01(input: &str) -> u64 {
     use Operator::*;
     let mut sum = 0;
-    for callibration in input.lines().collect::<Vec<_>>() {
+    for callibration in input.lines() {
         if let Some((target, operands)) = callibration.split_once(": ") {
             let target = target.parse::<u64>();
             let operands = operands
@@ -84,7 +84,7 @@ pub fn part_01(input: &str) -> u64 {
 pub fn part_02(input: &str) -> u64 {
     use Operator::*;
     let mut sum = 0;
-    for callibration in input.lines().collect::<Vec<_>>() {
+    for callibration in input.lines() {
         if let Some((target, operands)) = callibration.split_once(": ") {
             let target = target.parse::<u64>();
             let operands = operands

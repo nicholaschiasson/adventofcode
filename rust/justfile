@@ -17,6 +17,9 @@ format *ARGS:
 lint *ARGS:
   cargo clippy {{ARGS}}
 
+lint-super *ARGS:
+  cargo clippy -- -Wclippy::pedantic -Wclippy::restriction -Wclippy::nursery -Wclippy::cargo {{ARGS}}
+
 run *ARGS:
   cargo run {{ARGS}}
 
