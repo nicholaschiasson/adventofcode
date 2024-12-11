@@ -32,6 +32,7 @@
         buildInputs = with pkgs; [
           cargo-watch
           delve
+          dotnet-sdk
           go
           gopls
           just

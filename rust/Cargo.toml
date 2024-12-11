@@ -14,5 +14,6 @@ categories = ["games"]
 
 [dependencies]
 lexical = "6.0.1"
+memoize = "0.4.2"
 num = "0.3.1"
 regex = "1.4.2"

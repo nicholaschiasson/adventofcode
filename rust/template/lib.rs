@@ -16,7 +16,7 @@ mod tests {
     fn part_01() {
         assert_eq!(
             super::part_01(&read_resource(relative_input_path(&format!(
-                "{INPUT_PATH}::practice_01"
+                "{INPUT_PATH}::practice_1"
             )))),
             0
         );
@@ -32,7 +32,7 @@ mod tests {
     fn part_02() {
         assert_eq!(
             super::part_02(&read_resource(relative_input_path(&format!(
-                "{INPUT_PATH}::practice_01"
+                "{INPUT_PATH}::practice_1"
             )))),
             0
         );

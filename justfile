@@ -20,7 +20,7 @@ test-all *ARGS: (test "go" ARGS) (test "rust" ARGS)
 bootstrap LANG YEAR DAY PRACTICE_INPUT="1":
   mkdir -p rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests
   touch rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests/final.txt
-  for i in {0..{{PRACTICE_INPUT}}}; do \
+  for i in {1..{{PRACTICE_INPUT}}}; do \
     touch rsrc/inputs/year_{{YEAR}}/day_{{DAY}}/tests/practice_${i}.txt; \
   done
   just {{LANG}}/bootstrap {{YEAR}} {{DAY}}

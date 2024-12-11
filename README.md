@@ -54,8 +54,8 @@ the challenge for the day.
 │           └── day_10
 │               └── tests
 │                   ├── final.txt
-│                   ├── practice_01.txt
-│                   └── practice_02.txt
+│                   ├── practice_1.txt
+│                   └── practice_2.txt
 └── rust
     └── src
         └── year_2024
