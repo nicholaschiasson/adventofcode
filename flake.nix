@@ -38,8 +38,10 @@
           just
           iconv
           lldb
+          netcoredbg
           nil
           nixfmt-rfc-style
+          omnisharp-roslyn
           rust-analyzer
           starship
           watchexec

@@ -1,0 +1,29 @@
+bootstrap YEAR DAY:
+  mkdir -p AdventOfCode/Year{{YEAR}}
+  mkdir -p AdventOfCode.Tests/Year{{YEAR}}/Day01.cs
+  cp -n template/Lib.cs AdventOfCode/Year{{YEAR}}/Day{{DAY}}.cs
+  cp -n template/Test.cs AdventOfCode.Tests/Year{{YEAR}}/Day{{DAY}}.cs
+
+build *ARGS:
+  dotnet build {{ARGS}}
+
+check *ARGS:
+  @echo '{{ style("warning") }}No check for c#{{ NORMAL }}'
+
+clean *ARGS:
+  dotnet clean {{ARGS}}
+
+format *ARGS:
+  dotnet format {{ARGS}}
+
+lint *ARGS:
+  @echo '{{ style("warning") }}No linter for c#{{ NORMAL }}'
+
+run *ARGS:
+  dotnet run {{ARGS}}
+
+test *ARGS:
+  dotnet test {{ARGS}}
+
+watch *ARGS:
+  watchexec -e cs {{ARGS}}
