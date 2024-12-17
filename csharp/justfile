@@ -1,8 +1,7 @@
 bootstrap YEAR DAY:
-  mkdir -p AdventOfCode/Year{{YEAR}}
-  mkdir -p AdventOfCode.Tests/Year{{YEAR}}/Day01.cs
-  cp -n template/Lib.cs AdventOfCode/Year{{YEAR}}/Day{{DAY}}.cs
-  cp -n template/Test.cs AdventOfCode.Tests/Year{{YEAR}}/Day{{DAY}}.cs
+  dotnet new install --force template
+  dotnet new aoc -o Year{{YEAR}} -n Year{{YEAR}}.Day{{DAY}}
+  dotnet sln add Year{{YEAR}}/Year{{YEAR}}.Day{{DAY}}*/Year{{YEAR}}.Day{{DAY}}*.csproj
 
 build *ARGS:
   dotnet build {{ARGS}}

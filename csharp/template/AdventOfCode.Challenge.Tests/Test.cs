@@ -1,23 +1,23 @@
-namespace AdventOfCode.Tests.Year2024;
+namespace AdventOfCode.Challenge.Tests;
 
 [TestClass]
-public class Day01
+public class ChallengeTests
 {
-    private readonly AdventOfCode.Year2024.Day01 challenge;
+    private readonly AdventOfCode.Challenge.Challenge challenge;
     private readonly string inputDir;
 
-    public Day01()
+    public ChallengeTests()
     {
         string[] typeName = this.GetType().ToString().Split('.');
-        string year = typeName[2].Substring("Year".Length);
-        string day = typeName[3].Substring("Day".Length);
-        challenge = new AdventOfCode.Year2024.Day01();
-        inputDir = $"../../../../../rsrc/inputs/year_{year}/day_{day}/tests";
+        string year = typeName[0].Substring("Year".Length);
+        string day = typeName[1].Substring("Day".Length);
+        challenge = new AdventOfCode.Challenge.Challenge();
+        inputDir = $"../../../../../../rsrc/inputs/year_{year}/day_{day}/tests";
     }
 
     [TestMethod]
-    [DataRow("practice_01.txt", 11UL)]
-    [DataRow("final.txt", 1530215UL)]
+    [DataRow("practice_01.txt", 0UL)]
+    [DataRow("final.txt", 0UL)]
     public void Part01(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile));
@@ -25,8 +25,8 @@ public class Day01
     }
 
     [TestMethod]
-    [DataRow("practice_01.txt", 31UL)]
-    [DataRow("final.txt", 26800609UL)]
+    [DataRow("practice_01.txt", 0UL)]
+    [DataRow("final.txt", 0UL)]
     public void Part02(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile));

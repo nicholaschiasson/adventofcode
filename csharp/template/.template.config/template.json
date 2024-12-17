@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Nicholas Omer Chiasson",
+  "classifications": [ "AdventOfCode", "Library" ], 
+  "name": "Advent Of Code Challenge",
+  "identity": "AdventOfCode.Challenge.CSharp",         
+  "groupIdentity":"AdventOfCode.Challenge",
+  "shortName": "aoc",
+  "tags": {
+    "language": "C#",
+    "type":"project"
+  },
+  "sourceName": "AdventOfCode.Challenge",
+  "preferNameDirectory": true
+}

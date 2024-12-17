@@ -1,6 +1,6 @@
-namespace AdventOfCode.Year2024;
+namespace AdventOfCode.Challenge;
 
-public class Day01
+public class Challenge
 {
     public ulong Part01(string input)
     {
