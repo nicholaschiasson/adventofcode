@@ -1,9 +1,9 @@
-namespace AdventOfCode.Challenge.Tests;
+namespace Year2024.Day01.Tests;
 
 [TestClass]
 public class ChallengeTests
 {
-    private readonly AdventOfCode.Challenge.Challenge challenge;
+    private readonly Year2024.Day01.Challenge challenge;
     private readonly string inputDir;
 
     public ChallengeTests()
@@ -11,13 +11,13 @@ public class ChallengeTests
         string[] typeName = this.GetType().ToString().Split('.');
         string year = typeName[0].Substring("Year".Length);
         string day = typeName[1].Substring("Day".Length);
-        challenge = new AdventOfCode.Challenge.Challenge();
+        challenge = new Year2024.Day01.Challenge();
         inputDir = $"../../../../../../rsrc/inputs/year_{year}/day_{day}/tests";
     }
 
     [TestMethod]
-    [DataRow("practice_1.txt", 0ul)]
-    [DataRow("final.txt", 0ul)]
+    [DataRow("practice_01.txt", 11ul)]
+    [DataRow("final.txt", 1530215ul)]
     public void Part01(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile)).Trim();
@@ -25,8 +25,8 @@ public class ChallengeTests
     }
 
     [TestMethod]
-    [DataRow("practice_1.txt", 0ul)]
-    [DataRow("final.txt", 0ul)]
+    [DataRow("practice_01.txt", 31ul)]
+    [DataRow("final.txt", 26800609ul)]
     public void Part02(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile)).Trim();
