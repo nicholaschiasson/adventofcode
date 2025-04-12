@@ -1,3 +1,5 @@
+set shell := ["bash", "-cu"]
+
 bootstrap YEAR DAY:
   mkdir -p src/year_{{YEAR}}
   cp -n template/lib.rs src/year_{{YEAR}}/day_{{DAY}}.rs

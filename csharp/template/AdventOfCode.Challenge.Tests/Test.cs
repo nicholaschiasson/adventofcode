@@ -16,8 +16,8 @@ public class ChallengeTests
     }
 
     [TestMethod]
-    [DataRow("practice_1.txt", 0ul)]
-    [DataRow("final.txt", 0ul)]
+    [DataRow("practice_1.txt", 0UL)]
+    [DataRow("final.txt", 0UL)]
     public void Part01(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile)).Trim();
@@ -25,8 +25,8 @@ public class ChallengeTests
     }
 
     [TestMethod]
-    [DataRow("practice_1.txt", 0ul)]
-    [DataRow("final.txt", 0ul)]
+    [DataRow("practice_1.txt", 0UL)]
+    [DataRow("final.txt", 0UL)]
     public void Part02(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile)).Trim();

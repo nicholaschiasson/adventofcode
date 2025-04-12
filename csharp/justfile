@@ -1,3 +1,5 @@
+set shell := ["bash", "-cu"]
+
 bootstrap YEAR DAY:
   dotnet new install --force template
   dotnet new aoc -o Year{{YEAR}} -n Year{{YEAR}}.Day{{DAY}}

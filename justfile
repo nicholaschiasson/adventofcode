@@ -1,3 +1,5 @@
+set shell := ["bash", "-cu"]
+
 default: test-all
 
 bootstrap-all YEAR DAY PRACTICE_INPUT="1": (bootstrap "csharp" YEAR DAY PRACTICE_INPUT) (bootstrap "go" YEAR DAY PRACTICE_INPUT) (bootstrap "rust" YEAR DAY PRACTICE_INPUT)
