@@ -21,7 +21,7 @@ public class ChallengeTests
     public void Part01(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile)).Trim();
-        Assert.AreEqual<ulong>(expected, challenge.Part01(input));
+        Assert.AreEqual(expected, challenge.Part01(input));
     }
 
     [TestMethod]
@@ -30,6 +30,6 @@ public class ChallengeTests
     public void Part02(string inputFile, ulong expected)
     {
         string input = File.ReadAllText(Path.Join(inputDir, inputFile)).Trim();
-        Assert.AreEqual<ulong>(expected, challenge.Part02(input));
+        Assert.AreEqual(expected, challenge.Part02(input));
     }
 }
