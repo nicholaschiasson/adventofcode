@@ -1,0 +1,5 @@
+[tools]
+just = "1.43.1"
+watchexec = "2.3.2"
+zig = "latest"
+zls = "0.15.0"
