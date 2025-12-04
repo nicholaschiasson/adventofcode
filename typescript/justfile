@@ -1,0 +1,29 @@
+set shell := ["bash", "-cu"]
+
+bootstrap YEAR DAY:
+  mkdir -p src/year_{{YEAR}}
+  cp -nr template src/year_{{YEAR}}/day_{{DAY}}
+
+build *ARGS:
+  deno compile {{ARGS}}
+
+check *ARGS:
+  deno check {{ARGS}}
+
+clean *ARGS:
+  deno clean {{ARGS}}
+
+format *ARGS:
+  deno fmt {{ARGS}}
+
+lint *ARGS:
+  deno lint {{ARGS}}
+
+run *ARGS:
+  deno run {{ARGS}}
+
+test *ARGS:
+  deno test -A {{ARGS}}
+
+watch *ARGS:
+  deno test -A --watch {{ARGS}}

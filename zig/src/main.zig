@@ -1,5 +1,5 @@
 const std = @import("std");
-const zig = @import("root.zig");
+const adventofcode = @import("adventofcode");
 
 pub fn main() !void {
     // Prints to stderr, ignoring potential errors.

@@ -1,0 +1,29 @@
+set shell := ["bash", "-cu"]
+
+bootstrap YEAR DAY:
+  mkdir -p src/year_{{YEAR}}
+  cp -n template/lib.zig src/year_{{YEAR}}/day_{{DAY}}.zig
+
+build *ARGS:
+  zig build {{ARGS}}
+
+check *ARGS:
+  @echo '{{ style("warning") }}No check for zig{{ NORMAL }}'
+
+clean *ARGS:
+  zig clean {{ARGS}}
+
+format *ARGS:
+  zig fmt . {{ARGS}}
+
+lint *ARGS:
+  @echo '{{ style("warning") }}No linter for zig{{ NORMAL }}'
+
+run *ARGS:
+  zig build run {{ARGS}}
+
+test *ARGS:
+  zig build test --summary all {{ARGS}}
+
+watch *ARGS:
+  watchexec -ezig "zig build test --summary all" {{ARGS}}
