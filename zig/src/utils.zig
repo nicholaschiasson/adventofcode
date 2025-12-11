@@ -1,5 +1,9 @@
 const std = @import("std");
 
+pub const types = struct {
+    pub const Grid = @import("types/grid.zig").Grid;
+};
+
 pub fn readFile(allocator: std.mem.Allocator, path: []const u8) ![]u8 {
     const file = try std.fs.cwd().openFile(path, .{ .mode = .read_only });
     const stat = try file.stat();
